@@ -28,3 +28,5 @@ env/
 # Data files (ignored)
 *.csv
 *.tsv
+# block large pdf (github >100MB limit)
+100_Days_DL_youtube_course/notes.pdf
