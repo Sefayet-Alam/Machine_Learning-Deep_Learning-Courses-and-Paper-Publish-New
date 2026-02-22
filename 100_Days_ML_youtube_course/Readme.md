@@ -46,773 +46,3030 @@
 
 ---
 
-## Foundations (Videos 1–14)
+# 100 Days of Machine Learning (CampusX) — Interview‑Ready Revision Notes
 
-### Video 1 — What is Machine Learning?
-- ML = learning patterns from data to make predictions/decisions.
-- Key idea: training data teaches a mapping \(f(X)\rightarrow y\).
-- Interview prompts:
-  - When would you *not* use ML?
-  - Supervised vs unsupervised vs reinforcement learning use cases.
+This is a **single revision file** for the course topics.  
+Every video section includes:
+- What to remember (summary bullets)
+- Multiple interview questions
+- **Detailed answers** (not short)
 
-### Video 2 — AI vs ML vs DL
-- **AI:** broad umbrella (systems that exhibit “intelligence”).
-- **ML:** subset of AI, learns from data.
-- **DL:** subset of ML, neural networks with many layers (tensors + backprop).
-- Practical takeaway: DL often needs more data/compute but can learn features.
-
-### Video 3 — Types of ML (beginner → in depth)
-- **Supervised:** labeled data (classification/regression).
-- **Unsupervised:** no labels (clustering, dimensionality reduction).
-- **Reinforcement learning:** agent learns via reward signals.
-- Also common taxonomy:
-  - **Batch vs online**
-  - **Instance-based vs model-based**
-  - **Parametric vs non‑parametric**
-
-### Video 4 — Batch ML / Offline vs Online
-- **Batch (offline):** train on entire dataset; deploy; retrain periodically.
-- Pros: simpler, stable. Cons: slower to adapt, retraining cost.
-
-### Video 5 — Online learning
-- Model updates incrementally as new data arrives (streaming).
-- Pros: adapts to drift; works with big/streaming data.
-- Risks: feedback loops, noisy updates, model poisoning, concept drift.
-
-### Video 6 — Instance-based vs Model-based
-- **Instance-based:** store data; predict via similarity (kNN).
-- **Model-based:** learn parameters/structure (linear/logistic regression, trees).
-- Tradeoff: memory + inference time vs generalization + compactness.
-
-### Video 7 — Challenges / problems in ML
-- **Data quality:** missing values, outliers, noise, wrong labels.
-- **Bias/variance:** underfit vs overfit.
-- **Data leakage:** training sees future/target information.
-- **Nonstationarity:** concept drift.
-- **Interpretability, fairness, privacy, compute constraints.**
-
-### Video 8 — Applications of ML
-- Computer vision, NLP, recommendation, fraud detection, forecasting, anomaly detection, medical, manufacturing.
-- Interview angle: pick **one domain** and explain full pipeline + metrics.
-
-### Video 9 — Machine Learning Development Life Cycle (MLDLC)
-- Pipeline thinking + iterations + monitoring.
-- Always anchor on:
-  - objective/metric
-  - data strategy
-  - baseline
-  - validation design
-  - monitoring and retraining
-
-### Video 10 — Roles: Data Engineer vs Analyst vs Data Scientist vs ML Engineer
-- **Data Engineer:** pipelines, storage, ETL/ELT, reliability.
-- **Analyst:** BI, dashboards, descriptive insights.
-- **Data Scientist:** experiments, modeling, insights + prototyping.
-- **ML Engineer:** deploy, scale, monitor models, MLOps.
-
-### Video 11 — Tensors
-- Tensor = n‑dimensional array (scalar/1D/2D/3D…).
-- In ML:
-  - features as vectors/matrices
-  - batches as higher‑dim tensors
-- Interview: be clear about **shapes** (batch_size, features, channels, time steps).
-
-### Video 12 — Setup: Anaconda, Jupyter, Colab
-- Environments prevent dependency chaos.
-- Reproducibility: `requirements.txt` / `conda env export`.
-- Colab = quick GPU + shareable notebooks (but ephemeral storage).
-
-### Video 13 — End-to-end toy project
-A minimal ML project typically includes:
-- Define target, load data, train/test split
-- Preprocess (missing, encoding, scaling)
-- Train baseline model
-- Evaluate + iterate
-
-### Video 14 — Framing an ML problem
-- Identify:
-  - task: classification/regression/ranking/forecasting
-  - label definition + how labels are obtained
-  - metric: aligned with business
-  - constraints: latency, interpretability, fairness, cost
-  - baseline and feasibility check
+> Note: This file covers **Videos 1–100** (the portion accessible in this session).  
+> The playlist has more videos beyond 100; see the addendum at the end to complete 101–134 once you share those titles.
 
 ---
 
-## Data acquisition and EDA (Videos 15–22)
-
-### Video 15 — Working with CSV files
-- Pandas essentials: `read_csv`, parsing dates, separators, encodings, chunking.
-- Common issues: bad headers, NA markers, dtype inference errors.
-- Tip: always start with:
-  - `df.shape`, `df.head()`, `df.info()`, `df.describe(include='all')`
-
-### Video 16 — Working with JSON / SQL
-- JSON: nested structures → normalize (`json_normalize`) or custom parsing.
-- SQL: push filters/aggregations to the database when possible.
-- Interview: explain when you’d rather use SQL than pandas.
-
-### Video 17 — Fetching data from an API
-- Requests, auth tokens, pagination, rate limits, retries.
-- Convert JSON response to DataFrame.
-- Always log request params + response status for debugging.
-
-### Video 18 — Web scraping to DataFrame
-- Use `requests` + `BeautifulSoup` (static pages); Selenium for dynamic pages.
-- Be mindful of robots.txt, terms of service, and rate limiting.
-
-### Video 19 — Understanding your data
-- Know:
-  - feature types (num/cat/date/text)
-  - missingness patterns
-  - target distribution + imbalance
-  - leakage risks
-- Create a data dictionary (feature meaning, units, source, allowed ranges).
-
-### Video 20 — EDA (Univariate)
-- Numeric: histogram, KDE, boxplot; check skewness, heavy tails.
-- Categorical: value counts, bar plots.
-- Target: baseline rate + class balance.
-
-### Video 21 — EDA (Bivariate + Multivariate)
-- Numeric–numeric: scatter, correlation (Pearson/Spearman), nonlinearity.
-- Cat–num: box/violin plots, group means.
-- Cat–cat: contingency tables, chi-square intuition.
-- Multivariate: pairplots, heatmaps, interactions.
-
-### Video 22 — Pandas Profiling
-- Automated EDA report (missingness, correlations, distributions).
-- Use as a starting point, not a replacement for reasoning.
+## Modules
+- **Foundations** (Videos 1–14)
+- **Data acquisition & EDA** (Videos 15–22)
+- **Feature engineering & preprocessing** (Videos 23–46)
+- **Dimensionality reduction** (Videos 47–49)
+- **Regression** (Videos 50–68)
+- **Classification** (Videos 69–79)
+- **Decision trees** (Videos 80–83)
+- **Ensembles** (Videos 84–100)
 
 ---
 
-## Feature engineering and preprocessing (Videos 23–46)
-
-### Video 23 — What is Feature Engineering?
-- Turning raw data into signals that make learning easier.
-- Typical moves:
-  - transformation (log, sqrt)
-  - aggregation (counts, rolling means)
-  - interaction terms (ratios, products)
-  - domain encodings (time since last event)
-
-### Video 24 — Standardization
-- \(z = \frac{x-\mu}{\sigma}\)
-- Helps algorithms sensitive to scale (kNN, SVM, linear models, neural nets).
-- Fit scaler on **train only**, apply to val/test (pipeline).
-
-### Video 25 — Normalization / MinMax / MaxAbs / RobustScaling
-- MinMax: \(x'=\frac{x-x_{min}}{x_{max}-x_{min}}\)
-- Robust: uses median + IQR → resistant to outliers.
-- Pick based on outlier presence and model requirements.
-
-### Video 26 — Ordinal encoding + Label encoding
-- **Ordinal**: when categories have order (low/med/high).
-- **Label encoding** for target labels, not usually for nominal features.
-
-### Video 27 — One hot encoding
-- Nominal categories → binary columns.
-- Watch out for:
-  - high cardinality → blow-up
-  - unseen categories in test → use `handle_unknown='ignore'` in sklearn
-
-### Video 28 — ColumnTransformer
-- Apply different preprocessing to different columns.
-- The “correct” sklearn way to mix numeric/categorical transforms.
-
-### Video 29 — Pipelines A–Z
-- Why pipelines matter:
-  - prevent leakage
-  - reproducibility
-  - cross-validation correctness
-- Pattern:
-  - `Pipeline([('preprocess', ct), ('model', clf)])`
-
-### Video 30 — FunctionTransformer (log/reciprocal/sqrt)
-- Use transforms for skewed distributions.
-- Log transform example:
-  - `log1p(x)` handles zeros better than `log(x)`.
-
-### Video 31 — PowerTransformer (Box‑Cox / Yeo‑Johnson)
-- Gaussianize features (help linear models).
-- Box‑Cox requires positive values; Yeo‑Johnson supports zeros/negatives.
-
-### Video 32 — Binning and Binarization
-- Discretization can help:
-  - handle nonlinearity
-  - reduce noise
-  - make models more interpretable
-- Methods:
-  - uniform / quantile bins
-  - kmeans binning
-
-### Video 33 — Mixed variables
-- Variables that contain both numeric and categorical info (e.g., “A12”, “B03”).
-- Techniques:
-  - split into prefix + number
-  - parse into multiple features
-
-### Video 34 — Date and time variables
-- Common features:
-  - year, month, day, weekday
-  - hour, is_weekend, holiday flag
-  - time since event
-- Beware leakage: future timestamps.
-
-### Video 35 — Missing data (Part 1): Complete case analysis
-- Drop rows with missing values.
-- Works only if missingness is small and **MCAR** (missing completely at random).
-
-### Video 36 — Missing numerical data: SimpleImputer
-- Mean/median imputation.
-- Median is robust to outliers.
-- Always evaluate: imputation can shrink variance.
-
-### Video 37 — Missing categorical data
-- Most-frequent imputation.
-- “Missing” category as its own level can carry signal.
-
-### Video 38 — Missing indicator + Random sample imputation
-- Missingness itself can be predictive.
-- Add `is_missing` features.
-- Random sample preserves distribution but adds variance.
-
-### Video 39 — KNN imputer (multivariate)
-- Uses similarity between rows to fill missing values.
-- Needs scaling; can be slow; careful with leakage.
-
-### Video 40 — Iterative imputer / MICE
-- Model each feature with missing values as a function of other features (iterative).
-- Good when relationships are learnable; more computational cost.
-
-### Video 41 — Outliers
-- Outlier ≠ error always (could be rare but valid).
-- Decide using domain knowledge + impact on model/metric.
-
-### Video 42 — Z‑score method
-- Use standard deviations from mean; works for roughly normal distributions.
-- Sensitive to skew/outliers (mean and std get affected).
-
-### Video 43 — IQR method
-- IQR = Q3 − Q1; typical rule: outside [Q1−1.5IQR, Q3+1.5IQR]
-- More robust than z-score.
-
-### Video 44 — Percentile / Winsorization
-- Cap values at chosen percentiles (e.g., 1st and 99th).
-- Good for heavy-tailed distributions.
-
-### Video 45 — Feature construction & splitting
-- Construct: combine features (ratios, interactions).
-- Split: separate features into multiple (e.g., “Cabin” → deck/number/side).
-
-### Video 46 — Curse of dimensionality
-- Distance-based methods degrade in high dimensions.
-- Sparsity increases; need:
-  - feature selection
-  - dimensionality reduction (PCA)
-  - regularization
-
----
-
-## Dimensionality reduction (Videos 47–49)
-
-### Video 47 — PCA Part 1: Geometric intuition
-- PCA finds orthogonal directions of maximum variance (principal components).
-- Equivalent to rotating axes to capture most variance early.
-- Used for:
-  - compression
-  - de-noising
-  - speedups
-  - visualization (2D/3D)
-
-### Video 48 — PCA Part 2: Formulation
-- Steps:
-  1. Standardize features (usually)
-  2. Compute covariance matrix
-  3. Eigen decomposition → eigenvectors (components), eigenvalues (variance)
-- Explained variance ratio tells how much variance each component captures.
-
-### Video 49 — PCA Part 3: Code + visualization
-- `sklearn.decomposition.PCA(n_components=...)`
-- Use `explained_variance_ratio_` and cumulative variance plot.
-- Interview: **PCA is unsupervised**—can drop predictive signal if variance ≠ usefulness.
-
----
-
-## Regression (Videos 50–68)
-
-### Video 50 — Simple Linear Regression (intuition + code)
-- Model: \(\hat y = \beta_0 + \beta_1 x\)
-- Learn line that minimizes squared error.
-- Key assumptions (in classic stats view): linearity, independence, homoscedasticity, normal residuals.
-
-### Video 51 — Simple Linear Regression (math + scratch)
-- Closed form:
-  - \(\beta_1 = \frac{\sum (x_i-\bar x)(y_i-\bar y)}{\sum (x_i-\bar x)^2}\)
-  - \(\beta_0 = \bar y - \beta_1\bar x\)
-
-### Video 52 — Regression metrics (MSE/MAE/RMSE/R²/Adj R²)
-- MAE: robust; linear penalty.
-- MSE/RMSE: penalize big errors more.
-- R²: fraction of variance explained (can be negative on test).
-- Adjusted R²: penalizes adding useless features.
-
-### Video 53 — Multiple Linear Regression (intuition)
-- \(\hat y = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p\)
-- Geometric: hyperplane in p‑dim space.
-- Multicollinearity impacts coefficient stability.
-
-### Video 54 — Multiple Linear Regression (math, from scratch)
-- Normal equation:
-  - \(\beta = (X^T X)^{-1}X^T y\)  (if invertible)
-
-### Video 55 — Multiple Linear Regression (code from scratch)
-- Implement normal equation + intercept handling.
-- In practice, use sklearn + regularization for stability.
-
-### Video 56 — Gradient descent from scratch (end‑to‑end)
-- Iterative optimization:
-  - \(\theta := \theta - \alpha \nabla_\theta J(\theta)\)
-- Need learning rate \(\alpha\); watch divergence.
-- Use feature scaling for faster convergence.
-
-### Video 57 — Batch Gradient Descent
-- Uses all samples per update.
-- Stable but slow on large datasets.
-
-### Video 58 — Stochastic Gradient Descent (SGD)
-- Updates per single sample.
-- Noisy updates; can escape shallow minima; faster.
-- Needs learning rate schedule.
-
-### Video 59 — Mini‑batch Gradient Descent
-- Best of both worlds; common default in deep learning.
-
-### Video 60 — Polynomial regression
-- Add polynomial features: \(x, x^2, x^3, ...\)
-- Still linear in parameters; nonlinear in inputs.
-- Risk of overfitting → regularization helps.
-
-### Video 61 — Bias‑variance trade‑off
-- **High bias:** underfit; too simple.
-- **High variance:** overfit; too complex.
-- Fixes:
-  - more data
-  - regularization
-  - simpler model
-  - better features
-  - cross‑validation
-
-### Video 62 — Ridge regression Part 1 (intuition + code)
-- L2 regularization:
-  - minimize \(RSS + \lambda \sum \beta_j^2\)
-- Shrinks coefficients; helps multicollinearity; reduces variance.
-
-### Video 63 — Ridge Part 2 (math + scratch)
-- Closed form:
-  - \(\beta = (X^T X + \lambda I)^{-1}X^T y\)
-
-### Video 64 — Ridge Part 3 (gradient descent)
-- Update includes penalty term.
-- Regularization strength \(\lambda\) is hyperparameter.
-
-### Video 65 — Ridge Part 4 (5 key points)
-- Doesn’t set coefficients exactly to zero (usually).
-- Good default for linear regression with many correlated features.
-
-### Video 66 — Lasso regression
-- L1 regularization:
-  - \(RSS + \lambda \sum |\beta_j|\)
-- Can create sparsity (feature selection).
-
-### Video 67 — Why Lasso creates sparsity
-- L1 constraint geometry (diamond) makes optimum hit axes → exact zeros.
-
-### Video 68 — ElasticNet
-- Mix of L1 + L2.
-- Useful when:
-  - many correlated features
-  - want sparsity but stable selection
-
----
-
-## Classification (Videos 69–79)
-
-### Video 69 — Logistic Regression Part 1 (Perceptron trick)
-- Linear classifier: \(z=w^Tx+b\).
-- Perceptron uses sign of \(z\); logistic uses sigmoid to get probability.
-
-### Video 70 — Logistic Regression Part 2 (Perceptron trick code)
-- Implement linear decision boundary; understand separating hyperplane.
-
-### Video 71 — Logistic Regression Part 3 (Sigmoid)
-- Sigmoid:
-  - \(\sigma(z)=\frac{1}{1+e^{-z}}\)
-- Converts logits to probabilities; threshold (0.5) is adjustable.
-
-### Video 72 — Logistic Regression Part 4 (Loss / MLE / Binary Cross‑Entropy)
-- Bernoulli likelihood → negative log likelihood = cross entropy.
-- Loss for one sample:
-  - \(L = -[y\log(p) + (1-y)\log(1-p)]\)
-
-### Video 73 — Derivative of sigmoid
-- \(\sigma'(z)=\sigma(z)(1-\sigma(z))\)
-- Shows why gradients can vanish when probabilities saturate.
-
-### Video 74 — Logistic Regression Part 5 (Gradient descent + scratch)
-- Use gradient descent to fit \(w, b\).
-- Scaling helps; regularization helps generalization.
-
-### Video 75 — Classification metrics Part 1 (Accuracy + Confusion Matrix + Type I/II)
-- Confusion matrix: TP/FP/TN/FN.
-- Type I error = false positive; Type II = false negative.
-- Accuracy can be misleading on imbalanced data.
-
-### Video 76 — Precision, Recall, F1
-- Precision = TP / (TP + FP)
-- Recall = TP / (TP + FN)
-- F1 = harmonic mean of precision & recall.
-- Choose metric based on cost of FP vs FN.
-
-### Video 77 — Softmax regression (multinomial logistic)
-- For K classes:
-  - \(p_k = \frac{e^{z_k}}{\sum_j e^{z_j}}\)
-- Cross-entropy generalizes.
-
-### Video 78 — Polynomial features in logistic regression (nonlinear boundaries)
-- Add polynomial features to linear model → nonlinear decision boundary.
-- Alternative: kernels or tree-based models.
-
-### Video 79 — Logistic regression hyperparameters
-- Regularization strength `C` (inverse of λ), penalty (L1/L2), solver, class_weight.
-- Use cross-validation to tune.
-
----
-
-## Decision trees (Videos 80–83)
-
-### Video 80 — Decision trees intuition (entropy/gini/info gain)
-- Tree splits feature space to create pure nodes.
-- Impurity:
-  - Entropy: \(-\sum p_k\log p_k\)
-  - Gini: \(1-\sum p_k^2\)
-- Information gain = parent impurity − weighted child impurity.
-
-### Video 81 — Tree hyperparameters + overfitting
-- Depth, min_samples_split, min_samples_leaf, max_features, etc.
-- Trees overfit easily → prune / limit depth.
-
-### Video 82 — Regression trees
-- Split to minimize variance / MSE in leaves.
-- Prediction = mean target in leaf.
-
-### Video 83 — dtreeviz visualization
-- Visualize splits, class distributions, feature importance.
-- Helps with interpretability/debugging.
-
----
-
-## Ensembles (Videos 84–100)
-
-### Video 84 — Intro to ensemble learning
-- Combine weak/varied models to improve generalization.
-- Key idea: reduce variance (bagging) and/or bias (boosting).
-
-### Video 85 — Voting ensemble Part 1
-- Hard voting (majority class) vs soft voting (avg probabilities).
-- Works best when base models are diverse and reasonably strong.
-
-### Video 86 — Voting ensemble Part 2 (classification)
-- Soft voting needs calibrated probabilities (or models that output good probs).
-
-### Video 87 — Voting ensemble Part 3 (regression)
-- Average predictions, possibly weighted average.
-
-### Video 88 — Bagging Part 1
-- Bootstrap samples + train many models in parallel.
-- Reduces variance (esp. for high-variance learners like trees).
-
-### Video 89 — Bagging Part 2 (bagging classifiers)
-- Each model sees a bootstrap sample; aggregate predictions.
-- OOB samples give internal validation.
-
-### Video 90 — Bagging Part 3 (bagging regressor)
-- Average predictions of regressors; improves stability.
-
-### Video 91 — Random forest intro
-- Bagging + feature randomness at split time.
-- Strong default for tabular data.
-
-### Video 92 — Why random forest works so well (bias-variance)
-- Feature subsampling decorrelates trees → stronger variance reduction.
-
-### Video 93 — Bagging vs Random Forest
-- RF = bagging + random feature selection.
-- Helps create diversity across trees.
-
-### Video 94 — Random forest hyperparameters
-- n_estimators, max_depth, max_features, min_samples_leaf, bootstrap, etc.
-
-### Video 95 — Hyperparameter tuning RF (GridSearchCV / RandomizedSearchCV)
-- Grid is exhaustive; Randomized covers space efficiently.
-- Use cross-validation; keep pipeline to avoid leakage.
-
-### Video 96 — OOB score (out-of-bag)
-- Evaluate each sample on trees where it was OOB.
-- Internal validation without separate holdout (still keep test set).
-
-### Video 97 — Feature importance in trees/RF
-- Impurity-based importance can be biased (toward high-cardinality features).
-- Alternative: permutation importance, SHAP.
-
-### Video 98 — AdaBoost geometric intuition
-- Boosting focuses more on hard-to-classify points.
-- Combines weak learners sequentially.
-
-### Video 99 — AdaBoost step-by-step
-- Maintain sample weights; misclassified points get higher weight next round.
-- Final prediction is weighted vote of weak learners.
-
-### Video 100 — AdaBoost code from scratch
-- Implement:
-  - weighted error
-  - learner weight (alpha)
-  - update sample weights
-  - final ensemble prediction
-
----
+    ### Video 1 — What is Machine Learning? | 100 Days of Machine Learning
 
+    **Module:** Foundations
+
+    **Summary / what to remember**
+    - Definitions and big-picture distinctions (AI/ML/DL; supervised/unsupervised/RL).
+- Core ML workflow: framing → data → model → evaluation → iteration.
+- Practical considerations: roles, tooling, tensors, and project setup.
+
+    **Interview Questions + Answers**
+    **Q1. Explain machine learning clearly and give a real-world example.**
+
+Machine learning is a way to build systems that **learn a mapping from inputs to outputs** from examples, instead of relying on manually-written rules. The algorithm looks for patterns in historical data and produces a model that can generalize to new inputs.
+
+A strong example is **spam detection**. Writing rules for spam is brittle because spam patterns change constantly. With ML, you train on labeled emails (spam/ham), learn statistical patterns (words, sender reputation, link structure), and output a probability of spam for new emails. The interview-ready idea is: ML is best when the rules are complex, evolving, or expensive to maintain, and when you can collect representative data.
+
+**Q2. How do you decide between supervised, unsupervised, and reinforcement learning?**
+
+The choice depends on the **feedback signal** available. If you have labeled outcomes (fraud yes/no, price, churn), it's supervised learning. If you don’t have labels but want structure (clusters, anomaly detection, compression), it’s unsupervised learning. Reinforcement learning is used when actions affect future states and rewards are delayed (robotics, games, sequential recommendations).
+
+In interviews, emphasize practicality: RL can be costly/risky to deploy, so teams often begin with supervised learning on logged data and move toward RL once they can simulate or run safe online experiments.
+
+**Q3. What causes ML projects to fail and how do you prevent that?**
+
+Common failure modes include unclear objectives/metrics, low-quality labels, data leakage, and distribution shift. Another frequent mistake is skipping baselines and jumping into complex modeling without proving incremental value.
+
+Prevention is process: define metric and costs (FP/FN), build a baseline early, enforce a correct split strategy (time-based/group-based when needed), use pipelines to avoid leakage, and plan monitoring for drift. In short, most failures are **data + evaluation + deployment** problems, not “wrong algorithm” problems.
+
+    ---
+
+    ### Video 2 — AI Vs ML Vs DL for Beginners in Hindi
+
+    **Module:** Foundations
+
+    **Summary / what to remember**
+    - Definitions and big-picture distinctions (AI/ML/DL; supervised/unsupervised/RL).
+- Core ML workflow: framing → data → model → evaluation → iteration.
+- Practical considerations: roles, tooling, tensors, and project setup.
+
+    **Interview Questions + Answers**
+    **Q1. Explain machine learning clearly and give a real-world example.**
+
+Machine learning is a way to build systems that **learn a mapping from inputs to outputs** from examples, instead of relying on manually-written rules. The algorithm looks for patterns in historical data and produces a model that can generalize to new inputs.
+
+A strong example is **spam detection**. Writing rules for spam is brittle because spam patterns change constantly. With ML, you train on labeled emails (spam/ham), learn statistical patterns (words, sender reputation, link structure), and output a probability of spam for new emails. The interview-ready idea is: ML is best when the rules are complex, evolving, or expensive to maintain, and when you can collect representative data.
+
+**Q2. How do you decide between supervised, unsupervised, and reinforcement learning?**
+
+The choice depends on the **feedback signal** available. If you have labeled outcomes (fraud yes/no, price, churn), it's supervised learning. If you don’t have labels but want structure (clusters, anomaly detection, compression), it’s unsupervised learning. Reinforcement learning is used when actions affect future states and rewards are delayed (robotics, games, sequential recommendations).
+
+In interviews, emphasize practicality: RL can be costly/risky to deploy, so teams often begin with supervised learning on logged data and move toward RL once they can simulate or run safe online experiments.
+
+**Q3. What causes ML projects to fail and how do you prevent that?**
+
+Common failure modes include unclear objectives/metrics, low-quality labels, data leakage, and distribution shift. Another frequent mistake is skipping baselines and jumping into complex modeling without proving incremental value.
+
+Prevention is process: define metric and costs (FP/FN), build a baseline early, enforce a correct split strategy (time-based/group-based when needed), use pipelines to avoid leakage, and plan monitoring for drift. In short, most failures are **data + evaluation + deployment** problems, not “wrong algorithm” problems.
+
+    ---
+
+    ### Video 3 — Types of Machine Learning for Beginners | Types of ML in Depth
+
+    **Module:** Foundations
+
+    **Summary / what to remember**
+    - Definitions and big-picture distinctions (AI/ML/DL; supervised/unsupervised/RL).
+- Core ML workflow: framing → data → model → evaluation → iteration.
+- Practical considerations: roles, tooling, tensors, and project setup.
+
+    **Interview Questions + Answers**
+    **Q1. Explain machine learning clearly and give a real-world example.**
+
+Machine learning is a way to build systems that **learn a mapping from inputs to outputs** from examples, instead of relying on manually-written rules. The algorithm looks for patterns in historical data and produces a model that can generalize to new inputs.
+
+A strong example is **spam detection**. Writing rules for spam is brittle because spam patterns change constantly. With ML, you train on labeled emails (spam/ham), learn statistical patterns (words, sender reputation, link structure), and output a probability of spam for new emails. The interview-ready idea is: ML is best when the rules are complex, evolving, or expensive to maintain, and when you can collect representative data.
+
+**Q2. How do you decide between supervised, unsupervised, and reinforcement learning?**
+
+The choice depends on the **feedback signal** available. If you have labeled outcomes (fraud yes/no, price, churn), it's supervised learning. If you don’t have labels but want structure (clusters, anomaly detection, compression), it’s unsupervised learning. Reinforcement learning is used when actions affect future states and rewards are delayed (robotics, games, sequential recommendations).
+
+In interviews, emphasize practicality: RL can be costly/risky to deploy, so teams often begin with supervised learning on logged data and move toward RL once they can simulate or run safe online experiments.
+
+**Q3. What causes ML projects to fail and how do you prevent that?**
+
+Common failure modes include unclear objectives/metrics, low-quality labels, data leakage, and distribution shift. Another frequent mistake is skipping baselines and jumping into complex modeling without proving incremental value.
+
+Prevention is process: define metric and costs (FP/FN), build a baseline early, enforce a correct split strategy (time-based/group-based when needed), use pipelines to avoid leakage, and plan monitoring for drift. In short, most failures are **data + evaluation + deployment** problems, not “wrong algorithm” problems.
+
+    ---
+
+    ### Video 4 — Batch Machine Learning | Offline Vs Online Learning | Machine Learning Types
+
+    **Module:** Foundations
+
+    **Summary / what to remember**
+    - Definitions and big-picture distinctions (AI/ML/DL; supervised/unsupervised/RL).
+- Core ML workflow: framing → data → model → evaluation → iteration.
+- Practical considerations: roles, tooling, tensors, and project setup.
+
+    **Interview Questions + Answers**
+    **Q1. Explain machine learning clearly and give a real-world example.**
+
+Machine learning is a way to build systems that **learn a mapping from inputs to outputs** from examples, instead of relying on manually-written rules. The algorithm looks for patterns in historical data and produces a model that can generalize to new inputs.
+
+A strong example is **spam detection**. Writing rules for spam is brittle because spam patterns change constantly. With ML, you train on labeled emails (spam/ham), learn statistical patterns (words, sender reputation, link structure), and output a probability of spam for new emails. The interview-ready idea is: ML is best when the rules are complex, evolving, or expensive to maintain, and when you can collect representative data.
+
+**Q2. How do you decide between supervised, unsupervised, and reinforcement learning?**
+
+The choice depends on the **feedback signal** available. If you have labeled outcomes (fraud yes/no, price, churn), it's supervised learning. If you don’t have labels but want structure (clusters, anomaly detection, compression), it’s unsupervised learning. Reinforcement learning is used when actions affect future states and rewards are delayed (robotics, games, sequential recommendations).
+
+In interviews, emphasize practicality: RL can be costly/risky to deploy, so teams often begin with supervised learning on logged data and move toward RL once they can simulate or run safe online experiments.
+
+**Q3. What causes ML projects to fail and how do you prevent that?**
+
+Common failure modes include unclear objectives/metrics, low-quality labels, data leakage, and distribution shift. Another frequent mistake is skipping baselines and jumping into complex modeling without proving incremental value.
+
+Prevention is process: define metric and costs (FP/FN), build a baseline early, enforce a correct split strategy (time-based/group-based when needed), use pipelines to avoid leakage, and plan monitoring for drift. In short, most failures are **data + evaluation + deployment** problems, not “wrong algorithm” problems.
+
+    ---
+
+    ### Video 5 — Online Machine Learning | Online Vs Offline Machine Learning
+
+    **Module:** Foundations
+
+    **Summary / what to remember**
+    - Definitions and big-picture distinctions (AI/ML/DL; supervised/unsupervised/RL).
+- Core ML workflow: framing → data → model → evaluation → iteration.
+- Practical considerations: roles, tooling, tensors, and project setup.
+
+    **Interview Questions + Answers**
+    **Q1. Explain machine learning clearly and give a real-world example.**
+
+Machine learning is a way to build systems that **learn a mapping from inputs to outputs** from examples, instead of relying on manually-written rules. The algorithm looks for patterns in historical data and produces a model that can generalize to new inputs.
+
+A strong example is **spam detection**. Writing rules for spam is brittle because spam patterns change constantly. With ML, you train on labeled emails (spam/ham), learn statistical patterns (words, sender reputation, link structure), and output a probability of spam for new emails. The interview-ready idea is: ML is best when the rules are complex, evolving, or expensive to maintain, and when you can collect representative data.
+
+**Q2. How do you decide between supervised, unsupervised, and reinforcement learning?**
+
+The choice depends on the **feedback signal** available. If you have labeled outcomes (fraud yes/no, price, churn), it's supervised learning. If you don’t have labels but want structure (clusters, anomaly detection, compression), it’s unsupervised learning. Reinforcement learning is used when actions affect future states and rewards are delayed (robotics, games, sequential recommendations).
+
+In interviews, emphasize practicality: RL can be costly/risky to deploy, so teams often begin with supervised learning on logged data and move toward RL once they can simulate or run safe online experiments.
+
+**Q3. What causes ML projects to fail and how do you prevent that?**
+
+Common failure modes include unclear objectives/metrics, low-quality labels, data leakage, and distribution shift. Another frequent mistake is skipping baselines and jumping into complex modeling without proving incremental value.
+
+Prevention is process: define metric and costs (FP/FN), build a baseline early, enforce a correct split strategy (time-based/group-based when needed), use pipelines to avoid leakage, and plan monitoring for drift. In short, most failures are **data + evaluation + deployment** problems, not “wrong algorithm” problems.
+
+    ---
+
+    ### Video 6 — Instance-Based Vs Model-Based Learning | Types of Machine Learning
+
+    **Module:** Foundations
+
+    **Summary / what to remember**
+    - Definitions and big-picture distinctions (AI/ML/DL; supervised/unsupervised/RL).
+- Core ML workflow: framing → data → model → evaluation → iteration.
+- Practical considerations: roles, tooling, tensors, and project setup.
+
+    **Interview Questions + Answers**
+    **Q1. Explain machine learning clearly and give a real-world example.**
+
+Machine learning is a way to build systems that **learn a mapping from inputs to outputs** from examples, instead of relying on manually-written rules. The algorithm looks for patterns in historical data and produces a model that can generalize to new inputs.
+
+A strong example is **spam detection**. Writing rules for spam is brittle because spam patterns change constantly. With ML, you train on labeled emails (spam/ham), learn statistical patterns (words, sender reputation, link structure), and output a probability of spam for new emails. The interview-ready idea is: ML is best when the rules are complex, evolving, or expensive to maintain, and when you can collect representative data.
+
+**Q2. How do you decide between supervised, unsupervised, and reinforcement learning?**
+
+The choice depends on the **feedback signal** available. If you have labeled outcomes (fraud yes/no, price, churn), it's supervised learning. If you don’t have labels but want structure (clusters, anomaly detection, compression), it’s unsupervised learning. Reinforcement learning is used when actions affect future states and rewards are delayed (robotics, games, sequential recommendations).
+
+In interviews, emphasize practicality: RL can be costly/risky to deploy, so teams often begin with supervised learning on logged data and move toward RL once they can simulate or run safe online experiments.
+
+**Q3. What causes ML projects to fail and how do you prevent that?**
+
+Common failure modes include unclear objectives/metrics, low-quality labels, data leakage, and distribution shift. Another frequent mistake is skipping baselines and jumping into complex modeling without proving incremental value.
+
+Prevention is process: define metric and costs (FP/FN), build a baseline early, enforce a correct split strategy (time-based/group-based when needed), use pipelines to avoid leakage, and plan monitoring for drift. In short, most failures are **data + evaluation + deployment** problems, not “wrong algorithm” problems.
+
+    ---
+
+    ### Video 7 — Challenges in Machine Learning | Problems in Machine Learning
+
+    **Module:** Foundations
+
+    **Summary / what to remember**
+    - Definitions and big-picture distinctions (AI/ML/DL; supervised/unsupervised/RL).
+- Core ML workflow: framing → data → model → evaluation → iteration.
+- Practical considerations: roles, tooling, tensors, and project setup.
+
+    **Interview Questions + Answers**
+    **Q1. Explain machine learning clearly and give a real-world example.**
+
+Machine learning is a way to build systems that **learn a mapping from inputs to outputs** from examples, instead of relying on manually-written rules. The algorithm looks for patterns in historical data and produces a model that can generalize to new inputs.
+
+A strong example is **spam detection**. Writing rules for spam is brittle because spam patterns change constantly. With ML, you train on labeled emails (spam/ham), learn statistical patterns (words, sender reputation, link structure), and output a probability of spam for new emails. The interview-ready idea is: ML is best when the rules are complex, evolving, or expensive to maintain, and when you can collect representative data.
+
+**Q2. How do you decide between supervised, unsupervised, and reinforcement learning?**
+
+The choice depends on the **feedback signal** available. If you have labeled outcomes (fraud yes/no, price, churn), it's supervised learning. If you don’t have labels but want structure (clusters, anomaly detection, compression), it’s unsupervised learning. Reinforcement learning is used when actions affect future states and rewards are delayed (robotics, games, sequential recommendations).
+
+In interviews, emphasize practicality: RL can be costly/risky to deploy, so teams often begin with supervised learning on logged data and move toward RL once they can simulate or run safe online experiments.
+
+**Q3. What causes ML projects to fail and how do you prevent that?**
+
+Common failure modes include unclear objectives/metrics, low-quality labels, data leakage, and distribution shift. Another frequent mistake is skipping baselines and jumping into complex modeling without proving incremental value.
+
+Prevention is process: define metric and costs (FP/FN), build a baseline early, enforce a correct split strategy (time-based/group-based when needed), use pipelines to avoid leakage, and plan monitoring for drift. In short, most failures are **data + evaluation + deployment** problems, not “wrong algorithm” problems.
+
+    ---
+
+    ### Video 8 — Application of Machine Learning | Real Life Machine Learning Applications
+
+    **Module:** Foundations
+
+    **Summary / what to remember**
+    - Definitions and big-picture distinctions (AI/ML/DL; supervised/unsupervised/RL).
+- Core ML workflow: framing → data → model → evaluation → iteration.
+- Practical considerations: roles, tooling, tensors, and project setup.
+
+    **Interview Questions + Answers**
+    **Q1. Explain machine learning clearly and give a real-world example.**
+
+Machine learning is a way to build systems that **learn a mapping from inputs to outputs** from examples, instead of relying on manually-written rules. The algorithm looks for patterns in historical data and produces a model that can generalize to new inputs.
+
+A strong example is **spam detection**. Writing rules for spam is brittle because spam patterns change constantly. With ML, you train on labeled emails (spam/ham), learn statistical patterns (words, sender reputation, link structure), and output a probability of spam for new emails. The interview-ready idea is: ML is best when the rules are complex, evolving, or expensive to maintain, and when you can collect representative data.
+
+**Q2. How do you decide between supervised, unsupervised, and reinforcement learning?**
+
+The choice depends on the **feedback signal** available. If you have labeled outcomes (fraud yes/no, price, churn), it's supervised learning. If you don’t have labels but want structure (clusters, anomaly detection, compression), it’s unsupervised learning. Reinforcement learning is used when actions affect future states and rewards are delayed (robotics, games, sequential recommendations).
+
+In interviews, emphasize practicality: RL can be costly/risky to deploy, so teams often begin with supervised learning on logged data and move toward RL once they can simulate or run safe online experiments.
+
+**Q3. What causes ML projects to fail and how do you prevent that?**
+
+Common failure modes include unclear objectives/metrics, low-quality labels, data leakage, and distribution shift. Another frequent mistake is skipping baselines and jumping into complex modeling without proving incremental value.
+
+Prevention is process: define metric and costs (FP/FN), build a baseline early, enforce a correct split strategy (time-based/group-based when needed), use pipelines to avoid leakage, and plan monitoring for drift. In short, most failures are **data + evaluation + deployment** problems, not “wrong algorithm” problems.
+
+    ---
+
+    ### Video 9 — Machine Learning Development Life Cycle | MLDLC in Data Science
+
+    **Module:** Foundations
+
+    **Summary / what to remember**
+    - Definitions and big-picture distinctions (AI/ML/DL; supervised/unsupervised/RL).
+- Core ML workflow: framing → data → model → evaluation → iteration.
+- Practical considerations: roles, tooling, tensors, and project setup.
+
+    **Interview Questions + Answers**
+    **Q1. Explain machine learning clearly and give a real-world example.**
+
+Machine learning is a way to build systems that **learn a mapping from inputs to outputs** from examples, instead of relying on manually-written rules. The algorithm looks for patterns in historical data and produces a model that can generalize to new inputs.
+
+A strong example is **spam detection**. Writing rules for spam is brittle because spam patterns change constantly. With ML, you train on labeled emails (spam/ham), learn statistical patterns (words, sender reputation, link structure), and output a probability of spam for new emails. The interview-ready idea is: ML is best when the rules are complex, evolving, or expensive to maintain, and when you can collect representative data.
+
+**Q2. How do you decide between supervised, unsupervised, and reinforcement learning?**
+
+The choice depends on the **feedback signal** available. If you have labeled outcomes (fraud yes/no, price, churn), it's supervised learning. If you don’t have labels but want structure (clusters, anomaly detection, compression), it’s unsupervised learning. Reinforcement learning is used when actions affect future states and rewards are delayed (robotics, games, sequential recommendations).
+
+In interviews, emphasize practicality: RL can be costly/risky to deploy, so teams often begin with supervised learning on logged data and move toward RL once they can simulate or run safe online experiments.
+
+**Q3. What causes ML projects to fail and how do you prevent that?**
+
+Common failure modes include unclear objectives/metrics, low-quality labels, data leakage, and distribution shift. Another frequent mistake is skipping baselines and jumping into complex modeling without proving incremental value.
+
+Prevention is process: define metric and costs (FP/FN), build a baseline early, enforce a correct split strategy (time-based/group-based when needed), use pipelines to avoid leakage, and plan monitoring for drift. In short, most failures are **data + evaluation + deployment** problems, not “wrong algorithm” problems.
+
+    ---
+
+    ### Video 10 — Data Engineer Vs Data Analyst Vs Data Scientist Vs ML Engineer | Data Science Job Roles
+
+    **Module:** Foundations
+
+    **Summary / what to remember**
+    - Definitions and big-picture distinctions (AI/ML/DL; supervised/unsupervised/RL).
+- Core ML workflow: framing → data → model → evaluation → iteration.
+- Practical considerations: roles, tooling, tensors, and project setup.
+
+    **Interview Questions + Answers**
+    **Q1. Explain machine learning clearly and give a real-world example.**
+
+Machine learning is a way to build systems that **learn a mapping from inputs to outputs** from examples, instead of relying on manually-written rules. The algorithm looks for patterns in historical data and produces a model that can generalize to new inputs.
+
+A strong example is **spam detection**. Writing rules for spam is brittle because spam patterns change constantly. With ML, you train on labeled emails (spam/ham), learn statistical patterns (words, sender reputation, link structure), and output a probability of spam for new emails. The interview-ready idea is: ML is best when the rules are complex, evolving, or expensive to maintain, and when you can collect representative data.
+
+**Q2. How do you decide between supervised, unsupervised, and reinforcement learning?**
+
+The choice depends on the **feedback signal** available. If you have labeled outcomes (fraud yes/no, price, churn), it's supervised learning. If you don’t have labels but want structure (clusters, anomaly detection, compression), it’s unsupervised learning. Reinforcement learning is used when actions affect future states and rewards are delayed (robotics, games, sequential recommendations).
+
+In interviews, emphasize practicality: RL can be costly/risky to deploy, so teams often begin with supervised learning on logged data and move toward RL once they can simulate or run safe online experiments.
+
+**Q3. What causes ML projects to fail and how do you prevent that?**
+
+Common failure modes include unclear objectives/metrics, low-quality labels, data leakage, and distribution shift. Another frequent mistake is skipping baselines and jumping into complex modeling without proving incremental value.
+
+Prevention is process: define metric and costs (FP/FN), build a baseline early, enforce a correct split strategy (time-based/group-based when needed), use pipelines to avoid leakage, and plan monitoring for drift. In short, most failures are **data + evaluation + deployment** problems, not “wrong algorithm” problems.
+
+    ---
+
+    ### Video 11 — What are Tensors | Tensor In-depth Explanation | Tensor in Machine Learning
+
+    **Module:** Foundations
+
+    **Summary / what to remember**
+    - Definitions and big-picture distinctions (AI/ML/DL; supervised/unsupervised/RL).
+- Core ML workflow: framing → data → model → evaluation → iteration.
+- Practical considerations: roles, tooling, tensors, and project setup.
+
+    **Interview Questions + Answers**
+    **Q1. Explain machine learning clearly and give a real-world example.**
+
+Machine learning is a way to build systems that **learn a mapping from inputs to outputs** from examples, instead of relying on manually-written rules. The algorithm looks for patterns in historical data and produces a model that can generalize to new inputs.
+
+A strong example is **spam detection**. Writing rules for spam is brittle because spam patterns change constantly. With ML, you train on labeled emails (spam/ham), learn statistical patterns (words, sender reputation, link structure), and output a probability of spam for new emails. The interview-ready idea is: ML is best when the rules are complex, evolving, or expensive to maintain, and when you can collect representative data.
+
+**Q2. How do you decide between supervised, unsupervised, and reinforcement learning?**
+
+The choice depends on the **feedback signal** available. If you have labeled outcomes (fraud yes/no, price, churn), it's supervised learning. If you don’t have labels but want structure (clusters, anomaly detection, compression), it’s unsupervised learning. Reinforcement learning is used when actions affect future states and rewards are delayed (robotics, games, sequential recommendations).
+
+In interviews, emphasize practicality: RL can be costly/risky to deploy, so teams often begin with supervised learning on logged data and move toward RL once they can simulate or run safe online experiments.
+
+**Q3. What causes ML projects to fail and how do you prevent that?**
+
+Common failure modes include unclear objectives/metrics, low-quality labels, data leakage, and distribution shift. Another frequent mistake is skipping baselines and jumping into complex modeling without proving incremental value.
+
+Prevention is process: define metric and costs (FP/FN), build a baseline early, enforce a correct split strategy (time-based/group-based when needed), use pipelines to avoid leakage, and plan monitoring for drift. In short, most failures are **data + evaluation + deployment** problems, not “wrong algorithm” problems.
+
+    ---
+
+    ### Video 12 — Installing Anaconda | Jupyter Notebook | Google Colab for ML
+
+    **Module:** Foundations
+
+    **Summary / what to remember**
+    - Definitions and big-picture distinctions (AI/ML/DL; supervised/unsupervised/RL).
+- Core ML workflow: framing → data → model → evaluation → iteration.
+- Practical considerations: roles, tooling, tensors, and project setup.
+
+    **Interview Questions + Answers**
+    **Q1. Explain machine learning clearly and give a real-world example.**
+
+Machine learning is a way to build systems that **learn a mapping from inputs to outputs** from examples, instead of relying on manually-written rules. The algorithm looks for patterns in historical data and produces a model that can generalize to new inputs.
+
+A strong example is **spam detection**. Writing rules for spam is brittle because spam patterns change constantly. With ML, you train on labeled emails (spam/ham), learn statistical patterns (words, sender reputation, link structure), and output a probability of spam for new emails. The interview-ready idea is: ML is best when the rules are complex, evolving, or expensive to maintain, and when you can collect representative data.
+
+**Q2. How do you decide between supervised, unsupervised, and reinforcement learning?**
+
+The choice depends on the **feedback signal** available. If you have labeled outcomes (fraud yes/no, price, churn), it's supervised learning. If you don’t have labels but want structure (clusters, anomaly detection, compression), it’s unsupervised learning. Reinforcement learning is used when actions affect future states and rewards are delayed (robotics, games, sequential recommendations).
+
+In interviews, emphasize practicality: RL can be costly/risky to deploy, so teams often begin with supervised learning on logged data and move toward RL once they can simulate or run safe online experiments.
+
+**Q3. What causes ML projects to fail and how do you prevent that?**
+
+Common failure modes include unclear objectives/metrics, low-quality labels, data leakage, and distribution shift. Another frequent mistake is skipping baselines and jumping into complex modeling without proving incremental value.
+
+Prevention is process: define metric and costs (FP/FN), build a baseline early, enforce a correct split strategy (time-based/group-based when needed), use pipelines to avoid leakage, and plan monitoring for drift. In short, most failures are **data + evaluation + deployment** problems, not “wrong algorithm” problems.
+
+    ---
+
+    ### Video 13 — End to End Toy Project | Day 13 | 100 Days of Machine Learning
+
+    **Module:** Foundations
+
+    **Summary / what to remember**
+    - Definitions and big-picture distinctions (AI/ML/DL; supervised/unsupervised/RL).
+- Core ML workflow: framing → data → model → evaluation → iteration.
+- Practical considerations: roles, tooling, tensors, and project setup.
+
+    **Interview Questions + Answers**
+    **Q1. Explain machine learning clearly and give a real-world example.**
+
+Machine learning is a way to build systems that **learn a mapping from inputs to outputs** from examples, instead of relying on manually-written rules. The algorithm looks for patterns in historical data and produces a model that can generalize to new inputs.
+
+A strong example is **spam detection**. Writing rules for spam is brittle because spam patterns change constantly. With ML, you train on labeled emails (spam/ham), learn statistical patterns (words, sender reputation, link structure), and output a probability of spam for new emails. The interview-ready idea is: ML is best when the rules are complex, evolving, or expensive to maintain, and when you can collect representative data.
+
+**Q2. How do you decide between supervised, unsupervised, and reinforcement learning?**
+
+The choice depends on the **feedback signal** available. If you have labeled outcomes (fraud yes/no, price, churn), it's supervised learning. If you don’t have labels but want structure (clusters, anomaly detection, compression), it’s unsupervised learning. Reinforcement learning is used when actions affect future states and rewards are delayed (robotics, games, sequential recommendations).
+
+In interviews, emphasize practicality: RL can be costly/risky to deploy, so teams often begin with supervised learning on logged data and move toward RL once they can simulate or run safe online experiments.
+
+**Q3. What causes ML projects to fail and how do you prevent that?**
+
+Common failure modes include unclear objectives/metrics, low-quality labels, data leakage, and distribution shift. Another frequent mistake is skipping baselines and jumping into complex modeling without proving incremental value.
+
+Prevention is process: define metric and costs (FP/FN), build a baseline early, enforce a correct split strategy (time-based/group-based when needed), use pipelines to avoid leakage, and plan monitoring for drift. In short, most failures are **data + evaluation + deployment** problems, not “wrong algorithm” problems.
+
+    ---
+
+    ### Video 14 — How to Frame a Machine Learning Problem | Plan a Data Science Project
+
+    **Module:** Foundations
+
+    **Summary / what to remember**
+    - Definitions and big-picture distinctions (AI/ML/DL; supervised/unsupervised/RL).
+- Core ML workflow: framing → data → model → evaluation → iteration.
+- Practical considerations: roles, tooling, tensors, and project setup.
+
+    **Interview Questions + Answers**
+    **Q1. Explain machine learning clearly and give a real-world example.**
+
+Machine learning is a way to build systems that **learn a mapping from inputs to outputs** from examples, instead of relying on manually-written rules. The algorithm looks for patterns in historical data and produces a model that can generalize to new inputs.
+
+A strong example is **spam detection**. Writing rules for spam is brittle because spam patterns change constantly. With ML, you train on labeled emails (spam/ham), learn statistical patterns (words, sender reputation, link structure), and output a probability of spam for new emails. The interview-ready idea is: ML is best when the rules are complex, evolving, or expensive to maintain, and when you can collect representative data.
+
+**Q2. How do you decide between supervised, unsupervised, and reinforcement learning?**
+
+The choice depends on the **feedback signal** available. If you have labeled outcomes (fraud yes/no, price, churn), it's supervised learning. If you don’t have labels but want structure (clusters, anomaly detection, compression), it’s unsupervised learning. Reinforcement learning is used when actions affect future states and rewards are delayed (robotics, games, sequential recommendations).
+
+In interviews, emphasize practicality: RL can be costly/risky to deploy, so teams often begin with supervised learning on logged data and move toward RL once they can simulate or run safe online experiments.
+
+**Q3. What causes ML projects to fail and how do you prevent that?**
+
+Common failure modes include unclear objectives/metrics, low-quality labels, data leakage, and distribution shift. Another frequent mistake is skipping baselines and jumping into complex modeling without proving incremental value.
+
+Prevention is process: define metric and costs (FP/FN), build a baseline early, enforce a correct split strategy (time-based/group-based when needed), use pipelines to avoid leakage, and plan monitoring for drift. In short, most failures are **data + evaluation + deployment** problems, not “wrong algorithm” problems.
+
+    ---
+
+    ### Video 15 — Working with CSV files | Day 15
+
+    **Module:** Data acquisition & EDA
+
+    **Summary / what to remember**
+    - Data loading from files/APIs/scraping; common failure modes.
+- EDA: univariate, bivariate, multivariate; data understanding and leakage detection.
+- Automated profiling as a helper, not a replacement for reasoning.
+
+    **Interview Questions + Answers**
+    **Q1. How would you ingest data reliably from CSV/JSON/API/scraping?**
+
+Reliable ingestion means repeatability and validation. For CSV you control parsing (dtypes, date parsing, encoding) and validate schema. For APIs you handle pagination, auth, retries with backoff, and rate limits. For scraping you respect ToS, throttle requests, and write resilient selectors because HTML changes.
+
+In production you add checks (row counts, missing rates, ranges), logging, and dataset versioning so the training data is reproducible. Interview point: ingestion is a system, not a one-liner.
+
+**Q2. What are your top EDA checks before modeling?**
+
+I check target distribution and class imbalance, missingness patterns, outliers, feature types, and leakage risks. Then I explore relationships (correlations, group comparisons, potential interactions) to decide transformations and feature engineering.
+
+Finally, I validate evaluation design: if the data is temporal or grouped (users/devices), the split strategy must respect that structure to avoid optimistic results.
+
+**Q3. Give an example of leakage and how to detect it.**
+
+Leakage happens when training uses information unavailable at prediction time, like “future aggregates” or features computed using the full dataset including the test period. It can produce inflated CV scores that collapse in production.
+
+Detection: review feature definitions with timestamps, run label-shuffle sanity checks (high performance after shuffling suggests leakage), and compare performance under a correct split (time-based/group-based). Pipelines that fit preprocessors only on training folds are essential.
+
+    ---
+
+    ### Video 16 — Working with JSON/SQL | Day 16
+
+    **Module:** Data acquisition & EDA
+
+    **Summary / what to remember**
+    - Data loading from files/APIs/scraping; common failure modes.
+- EDA: univariate, bivariate, multivariate; data understanding and leakage detection.
+- Automated profiling as a helper, not a replacement for reasoning.
+
+    **Interview Questions + Answers**
+    **Q1. How would you ingest data reliably from CSV/JSON/API/scraping?**
+
+Reliable ingestion means repeatability and validation. For CSV you control parsing (dtypes, date parsing, encoding) and validate schema. For APIs you handle pagination, auth, retries with backoff, and rate limits. For scraping you respect ToS, throttle requests, and write resilient selectors because HTML changes.
+
+In production you add checks (row counts, missing rates, ranges), logging, and dataset versioning so the training data is reproducible. Interview point: ingestion is a system, not a one-liner.
+
+**Q2. What are your top EDA checks before modeling?**
+
+I check target distribution and class imbalance, missingness patterns, outliers, feature types, and leakage risks. Then I explore relationships (correlations, group comparisons, potential interactions) to decide transformations and feature engineering.
+
+Finally, I validate evaluation design: if the data is temporal or grouped (users/devices), the split strategy must respect that structure to avoid optimistic results.
+
+**Q3. Give an example of leakage and how to detect it.**
+
+Leakage happens when training uses information unavailable at prediction time, like “future aggregates” or features computed using the full dataset including the test period. It can produce inflated CV scores that collapse in production.
+
+Detection: review feature definitions with timestamps, run label-shuffle sanity checks (high performance after shuffling suggests leakage), and compare performance under a correct split (time-based/group-based). Pipelines that fit preprocessors only on training folds are essential.
+
+    ---
+
+    ### Video 17 — Fetching Data From an API | Day 17
+
+    **Module:** Data acquisition & EDA
+
+    **Summary / what to remember**
+    - Data loading from files/APIs/scraping; common failure modes.
+- EDA: univariate, bivariate, multivariate; data understanding and leakage detection.
+- Automated profiling as a helper, not a replacement for reasoning.
+
+    **Interview Questions + Answers**
+    **Q1. How would you ingest data reliably from CSV/JSON/API/scraping?**
+
+Reliable ingestion means repeatability and validation. For CSV you control parsing (dtypes, date parsing, encoding) and validate schema. For APIs you handle pagination, auth, retries with backoff, and rate limits. For scraping you respect ToS, throttle requests, and write resilient selectors because HTML changes.
+
+In production you add checks (row counts, missing rates, ranges), logging, and dataset versioning so the training data is reproducible. Interview point: ingestion is a system, not a one-liner.
+
+**Q2. What are your top EDA checks before modeling?**
+
+I check target distribution and class imbalance, missingness patterns, outliers, feature types, and leakage risks. Then I explore relationships (correlations, group comparisons, potential interactions) to decide transformations and feature engineering.
+
+Finally, I validate evaluation design: if the data is temporal or grouped (users/devices), the split strategy must respect that structure to avoid optimistic results.
+
+**Q3. Give an example of leakage and how to detect it.**
+
+Leakage happens when training uses information unavailable at prediction time, like “future aggregates” or features computed using the full dataset including the test period. It can produce inflated CV scores that collapse in production.
+
+Detection: review feature definitions with timestamps, run label-shuffle sanity checks (high performance after shuffling suggests leakage), and compare performance under a correct split (time-based/group-based). Pipelines that fit preprocessors only on training folds are essential.
+
+    ---
+
+    ### Video 18 — Fetching data using Web Scraping | Day 18
+
+    **Module:** Data acquisition & EDA
+
+    **Summary / what to remember**
+    - Data loading from files/APIs/scraping; common failure modes.
+- EDA: univariate, bivariate, multivariate; data understanding and leakage detection.
+- Automated profiling as a helper, not a replacement for reasoning.
+
+    **Interview Questions + Answers**
+    **Q1. How would you ingest data reliably from CSV/JSON/API/scraping?**
+
+Reliable ingestion means repeatability and validation. For CSV you control parsing (dtypes, date parsing, encoding) and validate schema. For APIs you handle pagination, auth, retries with backoff, and rate limits. For scraping you respect ToS, throttle requests, and write resilient selectors because HTML changes.
+
+In production you add checks (row counts, missing rates, ranges), logging, and dataset versioning so the training data is reproducible. Interview point: ingestion is a system, not a one-liner.
+
+**Q2. What are your top EDA checks before modeling?**
+
+I check target distribution and class imbalance, missingness patterns, outliers, feature types, and leakage risks. Then I explore relationships (correlations, group comparisons, potential interactions) to decide transformations and feature engineering.
+
+Finally, I validate evaluation design: if the data is temporal or grouped (users/devices), the split strategy must respect that structure to avoid optimistic results.
+
+**Q3. Give an example of leakage and how to detect it.**
+
+Leakage happens when training uses information unavailable at prediction time, like “future aggregates” or features computed using the full dataset including the test period. It can produce inflated CV scores that collapse in production.
+
+Detection: review feature definitions with timestamps, run label-shuffle sanity checks (high performance after shuffling suggests leakage), and compare performance under a correct split (time-based/group-based). Pipelines that fit preprocessors only on training folds are essential.
+
+    ---
+
+    ### Video 19 — Understanding Your Data | Day 19
+
+    **Module:** Data acquisition & EDA
+
+    **Summary / what to remember**
+    - Data loading from files/APIs/scraping; common failure modes.
+- EDA: univariate, bivariate, multivariate; data understanding and leakage detection.
+- Automated profiling as a helper, not a replacement for reasoning.
+
+    **Interview Questions + Answers**
+    **Q1. How would you ingest data reliably from CSV/JSON/API/scraping?**
+
+Reliable ingestion means repeatability and validation. For CSV you control parsing (dtypes, date parsing, encoding) and validate schema. For APIs you handle pagination, auth, retries with backoff, and rate limits. For scraping you respect ToS, throttle requests, and write resilient selectors because HTML changes.
+
+In production you add checks (row counts, missing rates, ranges), logging, and dataset versioning so the training data is reproducible. Interview point: ingestion is a system, not a one-liner.
+
+**Q2. What are your top EDA checks before modeling?**
+
+I check target distribution and class imbalance, missingness patterns, outliers, feature types, and leakage risks. Then I explore relationships (correlations, group comparisons, potential interactions) to decide transformations and feature engineering.
+
+Finally, I validate evaluation design: if the data is temporal or grouped (users/devices), the split strategy must respect that structure to avoid optimistic results.
+
+**Q3. Give an example of leakage and how to detect it.**
+
+Leakage happens when training uses information unavailable at prediction time, like “future aggregates” or features computed using the full dataset including the test period. It can produce inflated CV scores that collapse in production.
+
+Detection: review feature definitions with timestamps, run label-shuffle sanity checks (high performance after shuffling suggests leakage), and compare performance under a correct split (time-based/group-based). Pipelines that fit preprocessors only on training folds are essential.
+
+    ---
+
+    ### Video 20 — EDA using Univariate Analysis | Day 20
+
+    **Module:** Data acquisition & EDA
+
+    **Summary / what to remember**
+    - Data loading from files/APIs/scraping; common failure modes.
+- EDA: univariate, bivariate, multivariate; data understanding and leakage detection.
+- Automated profiling as a helper, not a replacement for reasoning.
+
+    **Interview Questions + Answers**
+    **Q1. How would you ingest data reliably from CSV/JSON/API/scraping?**
+
+Reliable ingestion means repeatability and validation. For CSV you control parsing (dtypes, date parsing, encoding) and validate schema. For APIs you handle pagination, auth, retries with backoff, and rate limits. For scraping you respect ToS, throttle requests, and write resilient selectors because HTML changes.
+
+In production you add checks (row counts, missing rates, ranges), logging, and dataset versioning so the training data is reproducible. Interview point: ingestion is a system, not a one-liner.
+
+**Q2. What are your top EDA checks before modeling?**
+
+I check target distribution and class imbalance, missingness patterns, outliers, feature types, and leakage risks. Then I explore relationships (correlations, group comparisons, potential interactions) to decide transformations and feature engineering.
+
+Finally, I validate evaluation design: if the data is temporal or grouped (users/devices), the split strategy must respect that structure to avoid optimistic results.
+
+**Q3. Give an example of leakage and how to detect it.**
+
+Leakage happens when training uses information unavailable at prediction time, like “future aggregates” or features computed using the full dataset including the test period. It can produce inflated CV scores that collapse in production.
+
+Detection: review feature definitions with timestamps, run label-shuffle sanity checks (high performance after shuffling suggests leakage), and compare performance under a correct split (time-based/group-based). Pipelines that fit preprocessors only on training folds are essential.
+
+    ---
+
+    ### Video 21 — EDA using Bivariate and Multivariate Analysis | Day 21
+
+    **Module:** Data acquisition & EDA
+
+    **Summary / what to remember**
+    - Data loading from files/APIs/scraping; common failure modes.
+- EDA: univariate, bivariate, multivariate; data understanding and leakage detection.
+- Automated profiling as a helper, not a replacement for reasoning.
+
+    **Interview Questions + Answers**
+    **Q1. How would you ingest data reliably from CSV/JSON/API/scraping?**
+
+Reliable ingestion means repeatability and validation. For CSV you control parsing (dtypes, date parsing, encoding) and validate schema. For APIs you handle pagination, auth, retries with backoff, and rate limits. For scraping you respect ToS, throttle requests, and write resilient selectors because HTML changes.
+
+In production you add checks (row counts, missing rates, ranges), logging, and dataset versioning so the training data is reproducible. Interview point: ingestion is a system, not a one-liner.
+
+**Q2. What are your top EDA checks before modeling?**
+
+I check target distribution and class imbalance, missingness patterns, outliers, feature types, and leakage risks. Then I explore relationships (correlations, group comparisons, potential interactions) to decide transformations and feature engineering.
+
+Finally, I validate evaluation design: if the data is temporal or grouped (users/devices), the split strategy must respect that structure to avoid optimistic results.
+
+**Q3. Give an example of leakage and how to detect it.**
+
+Leakage happens when training uses information unavailable at prediction time, like “future aggregates” or features computed using the full dataset including the test period. It can produce inflated CV scores that collapse in production.
+
+Detection: review feature definitions with timestamps, run label-shuffle sanity checks (high performance after shuffling suggests leakage), and compare performance under a correct split (time-based/group-based). Pipelines that fit preprocessors only on training folds are essential.
+
+    ---
+
+    ### Video 22 — Pandas Profiling | Day 22
+
+    **Module:** Data acquisition & EDA
+
+    **Summary / what to remember**
+    - Data loading from files/APIs/scraping; common failure modes.
+- EDA: univariate, bivariate, multivariate; data understanding and leakage detection.
+- Automated profiling as a helper, not a replacement for reasoning.
+
+    **Interview Questions + Answers**
+    **Q1. How would you ingest data reliably from CSV/JSON/API/scraping?**
+
+Reliable ingestion means repeatability and validation. For CSV you control parsing (dtypes, date parsing, encoding) and validate schema. For APIs you handle pagination, auth, retries with backoff, and rate limits. For scraping you respect ToS, throttle requests, and write resilient selectors because HTML changes.
+
+In production you add checks (row counts, missing rates, ranges), logging, and dataset versioning so the training data is reproducible. Interview point: ingestion is a system, not a one-liner.
+
+**Q2. What are your top EDA checks before modeling?**
+
+I check target distribution and class imbalance, missingness patterns, outliers, feature types, and leakage risks. Then I explore relationships (correlations, group comparisons, potential interactions) to decide transformations and feature engineering.
+
+Finally, I validate evaluation design: if the data is temporal or grouped (users/devices), the split strategy must respect that structure to avoid optimistic results.
+
+**Q3. Give an example of leakage and how to detect it.**
+
+Leakage happens when training uses information unavailable at prediction time, like “future aggregates” or features computed using the full dataset including the test period. It can produce inflated CV scores that collapse in production.
+
+Detection: review feature definitions with timestamps, run label-shuffle sanity checks (high performance after shuffling suggests leakage), and compare performance under a correct split (time-based/group-based). Pipelines that fit preprocessors only on training folds are essential.
+
+    ---
+
+    ### Video 23 — What is Feature Engineering | Day 23
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 24 — Feature Scaling - Standardization | Day 24
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 25 — Feature Scaling - Normalization | MinMaxScaling | MaxAbsScaling | RobustScaling
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 26 — Encoding Categorical Data | Ordinal Encoding | Label Encoding
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 27 — One Hot Encoding | Handling Categorical Data | Day 27
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 28 — Column Transformer in Machine Learning | ColumnTransformer in Sklearn
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 29 — Machine Learning Pipelines A-Z | Day 29
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 30 — Function Transformer | Log / Reciprocal / Square Root Transform
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 31 — Power Transformer | Box-Cox | Yeo-Johnson
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 32 — Binning and Binarization | Discretization | Quantile / KMeans Binning
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 33 — Handling Mixed Variables | Feature Engineering
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 34 — Handling Date and Time Variables | Day 34
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 35 — Handling Missing Data | Part 1 | Complete Case Analysis
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 36 — Handling missing data | Numerical Data | Simple Imputer
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 37 — Handling Missing Categorical Data | Most Frequent | Missing Category
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 38 — Missing Indicator | Random Sample Imputation | Part 4
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 39 — KNN Imputer | Multivariate Imputation | Part 5
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 40 — MICE / Iterative Imputer | Multivariate Imputation by Chained Equations
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 41 — What are Outliers | Outliers in Machine Learning
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 42 — Outlier Detection/Removal using Z-score | Part 2
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 43 — Outlier Detection/Removal using IQR | Part 3
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 44 — Outlier Detection using Percentiles | Winsorization
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 45 — Feature Construction | Feature Splitting
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 46 — Curse of Dimensionality
+
+    **Module:** Feature engineering & preprocessing
+
+    **Summary / what to remember**
+    - Transformations/encodings/scaling; when and why each is used.
+- Missing values strategies; indicators; multivariate imputers.
+- Outliers; detection vs treatment; dimensionality concerns; pipelines.
+
+    **Interview Questions + Answers**
+    **Q1. Why do we scale/normalize and which models need it?**
+
+Scaling makes feature magnitudes comparable. Distance-based models (kNN), margin-based models (SVM), and gradient-based optimization (linear/logistic regression, neural nets) are sensitive to scale. Without scaling, a large-scale feature can dominate distances or gradients.
+
+Tree models are usually scale-invariant because they split by order, not magnitude. Interview point: fit scalers on train only via pipelines to avoid leakage.
+
+**Q2. How do you handle missing values properly?**
+
+Start with understanding missingness (MCAR/MAR/MNAR). If missingness is tiny and random, dropping rows can be acceptable. Otherwise use simple imputation (median for numeric; most frequent or 'Missing' for categorical) as baseline.
+
+Add missing indicators when missingness may be informative. Use KNN/MICE/iterative imputation for complex cases, but keep them inside cross-validation pipelines to prevent leakage and to evaluate whether complexity actually helps.
+
+**Q3. How do you build leakage-safe preprocessing in sklearn?**
+
+Put all data-dependent steps inside a Pipeline. Use ColumnTransformer to apply numeric steps (imputer + scaler + transformer) and categorical steps (imputer + one-hot encoder). Attach the model as the last step.
+
+This ensures preprocessing is fit only on training folds during CV, avoids leakage, and creates a single object you can serialize and deploy consistently.
+
+    ---
+
+    ### Video 47 — PCA Part 1 | Geometric Intuition
+
+    **Module:** Dimensionality reduction
+
+    **Summary / what to remember**
+    - PCA intuition, math, and implementation.
+- Explained variance; when PCA helps or hurts.
+- Standardization and interpretability tradeoffs.
+
+    **Interview Questions + Answers**
+    **Q1. Explain PCA and when it helps.**
+
+PCA finds orthogonal directions (principal components) that capture maximum variance. It can compress data, reduce noise, speed up training, and enable visualization.
+
+It helps when features are correlated or when you have many dimensions hurting distance-based models. However PCA is unsupervised, so it can remove predictive low-variance signal; you must validate impact on model performance.
+
+**Q2. Why standardize before PCA?**
+
+PCA is variance-driven. If one feature has much larger scale, it dominates the covariance matrix and therefore dominates the components. Standardization prevents units from dictating the result, making PCA reflect structure rather than measurement scale.
+
+**Q3. How do you choose number of components?**
+
+Use cumulative explained variance ratio as a guide (e.g., 90–99%), but treat it as a hyperparameter and validate downstream model performance. The best choice balances predictive performance, speed, and stability, not only variance captured.
+
+    ---
+
+    ### Video 48 — PCA Part 2 | Formulation + Step-by-step
+
+    **Module:** Dimensionality reduction
+
+    **Summary / what to remember**
+    - PCA intuition, math, and implementation.
+- Explained variance; when PCA helps or hurts.
+- Standardization and interpretability tradeoffs.
+
+    **Interview Questions + Answers**
+    **Q1. Explain PCA and when it helps.**
+
+PCA finds orthogonal directions (principal components) that capture maximum variance. It can compress data, reduce noise, speed up training, and enable visualization.
+
+It helps when features are correlated or when you have many dimensions hurting distance-based models. However PCA is unsupervised, so it can remove predictive low-variance signal; you must validate impact on model performance.
+
+**Q2. Why standardize before PCA?**
+
+PCA is variance-driven. If one feature has much larger scale, it dominates the covariance matrix and therefore dominates the components. Standardization prevents units from dictating the result, making PCA reflect structure rather than measurement scale.
+
+**Q3. How do you choose number of components?**
+
+Use cumulative explained variance ratio as a guide (e.g., 90–99%), but treat it as a hyperparameter and validate downstream model performance. The best choice balances predictive performance, speed, and stability, not only variance captured.
+
+    ---
+
+    ### Video 49 — PCA Part 3 | Code Example + Visualization
+
+    **Module:** Dimensionality reduction
+
+    **Summary / what to remember**
+    - PCA intuition, math, and implementation.
+- Explained variance; when PCA helps or hurts.
+- Standardization and interpretability tradeoffs.
+
+    **Interview Questions + Answers**
+    **Q1. Explain PCA and when it helps.**
+
+PCA finds orthogonal directions (principal components) that capture maximum variance. It can compress data, reduce noise, speed up training, and enable visualization.
+
+It helps when features are correlated or when you have many dimensions hurting distance-based models. However PCA is unsupervised, so it can remove predictive low-variance signal; you must validate impact on model performance.
+
+**Q2. Why standardize before PCA?**
+
+PCA is variance-driven. If one feature has much larger scale, it dominates the covariance matrix and therefore dominates the components. Standardization prevents units from dictating the result, making PCA reflect structure rather than measurement scale.
+
+**Q3. How do you choose number of components?**
+
+Use cumulative explained variance ratio as a guide (e.g., 90–99%), but treat it as a hyperparameter and validate downstream model performance. The best choice balances predictive performance, speed, and stability, not only variance captured.
+
+    ---
+
+    ### Video 50 — Simple Linear Regression | Code + Intuition
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 51 — Simple Linear Regression | Mathematical Formulation | Scratch
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 52 — Regression Metrics | MSE, MAE, RMSE, R2, Adjusted R2
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 53 — Multiple Linear Regression | Geometric Intuition & Code
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 54 — Multiple Linear Regression | Part 2 | Mathematical Formulation
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 55 — Multiple Linear Regression | Part 3 | Code From Scratch
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 56 — Gradient Descent From Scratch | End-to-end + Animation
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 57 — Batch Gradient Descent | Code demo
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 58 — Stochastic Gradient Descent
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 59 — Mini-Batch Gradient Descent
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 60 — Polynomial Regression
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 61 — Bias Variance Trade-off | Overfitting vs Underfitting
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 62 — Ridge Regression Part 1 | Intuition + Code
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 63 — Ridge Regression Part 2 | Math + Scratch
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 64 — Ridge Regression Part 3 | Gradient Descent
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 65 — Ridge Regression Part 4 | 5 Key Points
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 66 — Lasso Regression | Intuition + Code
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 67 — Why Lasso creates sparsity?
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 68 — ElasticNet Regression | Intuition + Code
+
+    **Module:** Regression
+
+    **Summary / what to remember**
+    - Linear/polynomial regression; optimization via gradient descent.
+- Metrics (MAE/MSE/RMSE/R²) and bias-variance reasoning.
+- Regularization (ridge/lasso/elasticnet) and coefficient behavior.
+
+    **Interview Questions + Answers**
+    **Q1. Explain linear regression (math + intuition) and how you evaluate it.**
+
+Linear regression fits ŷ = β0 + βᵀx by minimizing squared error. Closed-form solution exists via normal equation β = (XᵀX)⁻¹Xᵀy (when invertible). In practice we often rely on numerical solvers and regularization.
+
+Evaluation uses MAE/RMSE depending on cost of large errors and checks generalization via proper validation/CV. Diagnostics include residual patterns (nonlinearity), heteroscedasticity, and outlier influence.
+
+**Q2. Bias-variance and how regularization helps?**
+
+Bias is error from overly simplistic assumptions (underfitting). Variance is error from sensitivity to training data noise (overfitting). Regularization adds a penalty to reduce model complexity, increasing bias slightly but often reducing variance significantly, improving test performance.
+
+Ridge (L2) shrinks coefficients smoothly and is strong under multicollinearity. Lasso (L1) can drive coefficients to zero (feature selection). Elastic Net mixes both for stability with correlated features.
+
+**Q3. Compare MAE/MSE/RMSE/R² and choose metrics.**
+
+MAE is robust and interpretable as average absolute error. MSE squares errors, heavily penalizing large mistakes; RMSE is the same in target units and highlights large errors. R² measures variance explained but can be misleading (can be negative on test, not cost-aware).
+
+Choose metric based on business cost: forecasting with heavy penalty for big misses often uses RMSE; robust settings can prefer MAE. Always evaluate on held-out data and consider confidence intervals via CV.
+
+    ---
+
+    ### Video 69 — Logistic Regression Part 1 | Perceptron Trick
+
+    **Module:** Classification
+
+    **Summary / what to remember**
+    - Logistic regression from perceptron to sigmoid to loss.
+- Classification metrics; choosing thresholds under cost constraints.
+- Multiclass softmax and nonlinear decision boundaries.
+
+    **Interview Questions + Answers**
+    **Q1. Explain logistic regression end-to-end.**
+
+Logistic regression models log-odds as linear: z = wᵀx + b, converts to probability with sigmoid p = 1/(1+e⁻ᶻ). Training minimizes negative log-likelihood for Bernoulli outcomes, giving binary cross-entropy: -[y log p + (1-y) log(1-p)].
+
+It outputs probabilities, so you should tune the decision threshold based on costs rather than defaulting to 0.5. Regularization and scaling often improve stability and generalization.
+
+**Q2. Accuracy vs precision/recall/F1; when each matters?**
+
+Accuracy fails on imbalance (predicting majority class can look great). Precision controls false positives; recall controls false negatives; F1 balances them. Choose based on cost: medical screening values high recall; spam filters often want high precision; fraud often needs a tradeoff with threshold tuning.
+
+PR-AUC is especially useful on imbalanced data, and calibration/threshold optimization are often required for production decisions.
+
+**Q3. Softmax regression vs one-vs-rest for multiclass?**
+
+Softmax regression outputs a probability distribution across K mutually exclusive classes using exp-normalization. It’s a single coherent model with cross-entropy loss. One-vs-rest trains K binary classifiers; it can work but probability outputs may not be consistent or calibrated as a single distribution.
+
+For mutually exclusive classes, softmax is typically preferred; OVR is handy for algorithms without native multiclass support or for certain interpretability constraints.
+
+    ---
+
+    ### Video 70 — Logistic Regression Part 2 | Perceptron Trick Code
+
+    **Module:** Classification
+
+    **Summary / what to remember**
+    - Logistic regression from perceptron to sigmoid to loss.
+- Classification metrics; choosing thresholds under cost constraints.
+- Multiclass softmax and nonlinear decision boundaries.
+
+    **Interview Questions + Answers**
+    **Q1. Explain logistic regression end-to-end.**
+
+Logistic regression models log-odds as linear: z = wᵀx + b, converts to probability with sigmoid p = 1/(1+e⁻ᶻ). Training minimizes negative log-likelihood for Bernoulli outcomes, giving binary cross-entropy: -[y log p + (1-y) log(1-p)].
+
+It outputs probabilities, so you should tune the decision threshold based on costs rather than defaulting to 0.5. Regularization and scaling often improve stability and generalization.
+
+**Q2. Accuracy vs precision/recall/F1; when each matters?**
+
+Accuracy fails on imbalance (predicting majority class can look great). Precision controls false positives; recall controls false negatives; F1 balances them. Choose based on cost: medical screening values high recall; spam filters often want high precision; fraud often needs a tradeoff with threshold tuning.
+
+PR-AUC is especially useful on imbalanced data, and calibration/threshold optimization are often required for production decisions.
+
+**Q3. Softmax regression vs one-vs-rest for multiclass?**
+
+Softmax regression outputs a probability distribution across K mutually exclusive classes using exp-normalization. It’s a single coherent model with cross-entropy loss. One-vs-rest trains K binary classifiers; it can work but probability outputs may not be consistent or calibrated as a single distribution.
+
+For mutually exclusive classes, softmax is typically preferred; OVR is handy for algorithms without native multiclass support or for certain interpretability constraints.
+
+    ---
+
+    ### Video 71 — Logistic Regression Part 3 | Sigmoid Function
+
+    **Module:** Classification
+
+    **Summary / what to remember**
+    - Logistic regression from perceptron to sigmoid to loss.
+- Classification metrics; choosing thresholds under cost constraints.
+- Multiclass softmax and nonlinear decision boundaries.
+
+    **Interview Questions + Answers**
+    **Q1. Explain logistic regression end-to-end.**
+
+Logistic regression models log-odds as linear: z = wᵀx + b, converts to probability with sigmoid p = 1/(1+e⁻ᶻ). Training minimizes negative log-likelihood for Bernoulli outcomes, giving binary cross-entropy: -[y log p + (1-y) log(1-p)].
+
+It outputs probabilities, so you should tune the decision threshold based on costs rather than defaulting to 0.5. Regularization and scaling often improve stability and generalization.
+
+**Q2. Accuracy vs precision/recall/F1; when each matters?**
+
+Accuracy fails on imbalance (predicting majority class can look great). Precision controls false positives; recall controls false negatives; F1 balances them. Choose based on cost: medical screening values high recall; spam filters often want high precision; fraud often needs a tradeoff with threshold tuning.
+
+PR-AUC is especially useful on imbalanced data, and calibration/threshold optimization are often required for production decisions.
+
+**Q3. Softmax regression vs one-vs-rest for multiclass?**
+
+Softmax regression outputs a probability distribution across K mutually exclusive classes using exp-normalization. It’s a single coherent model with cross-entropy loss. One-vs-rest trains K binary classifiers; it can work but probability outputs may not be consistent or calibrated as a single distribution.
+
+For mutually exclusive classes, softmax is typically preferred; OVR is handy for algorithms without native multiclass support or for certain interpretability constraints.
+
+    ---
+
+    ### Video 72 — Logistic Regression Part 4 | Loss Function | MLE | Binary Cross Entropy
+
+    **Module:** Classification
+
+    **Summary / what to remember**
+    - Logistic regression from perceptron to sigmoid to loss.
+- Classification metrics; choosing thresholds under cost constraints.
+- Multiclass softmax and nonlinear decision boundaries.
+
+    **Interview Questions + Answers**
+    **Q1. Explain logistic regression end-to-end.**
+
+Logistic regression models log-odds as linear: z = wᵀx + b, converts to probability with sigmoid p = 1/(1+e⁻ᶻ). Training minimizes negative log-likelihood for Bernoulli outcomes, giving binary cross-entropy: -[y log p + (1-y) log(1-p)].
+
+It outputs probabilities, so you should tune the decision threshold based on costs rather than defaulting to 0.5. Regularization and scaling often improve stability and generalization.
+
+**Q2. Accuracy vs precision/recall/F1; when each matters?**
+
+Accuracy fails on imbalance (predicting majority class can look great). Precision controls false positives; recall controls false negatives; F1 balances them. Choose based on cost: medical screening values high recall; spam filters often want high precision; fraud often needs a tradeoff with threshold tuning.
+
+PR-AUC is especially useful on imbalanced data, and calibration/threshold optimization are often required for production decisions.
+
+**Q3. Softmax regression vs one-vs-rest for multiclass?**
+
+Softmax regression outputs a probability distribution across K mutually exclusive classes using exp-normalization. It’s a single coherent model with cross-entropy loss. One-vs-rest trains K binary classifiers; it can work but probability outputs may not be consistent or calibrated as a single distribution.
+
+For mutually exclusive classes, softmax is typically preferred; OVR is handy for algorithms without native multiclass support or for certain interpretability constraints.
+
+    ---
+
+    ### Video 73 — Derivative of Sigmoid Function
+
+    **Module:** Classification
+
+    **Summary / what to remember**
+    - Logistic regression from perceptron to sigmoid to loss.
+- Classification metrics; choosing thresholds under cost constraints.
+- Multiclass softmax and nonlinear decision boundaries.
+
+    **Interview Questions + Answers**
+    **Q1. Explain logistic regression end-to-end.**
+
+Logistic regression models log-odds as linear: z = wᵀx + b, converts to probability with sigmoid p = 1/(1+e⁻ᶻ). Training minimizes negative log-likelihood for Bernoulli outcomes, giving binary cross-entropy: -[y log p + (1-y) log(1-p)].
+
+It outputs probabilities, so you should tune the decision threshold based on costs rather than defaulting to 0.5. Regularization and scaling often improve stability and generalization.
+
+**Q2. Accuracy vs precision/recall/F1; when each matters?**
+
+Accuracy fails on imbalance (predicting majority class can look great). Precision controls false positives; recall controls false negatives; F1 balances them. Choose based on cost: medical screening values high recall; spam filters often want high precision; fraud often needs a tradeoff with threshold tuning.
+
+PR-AUC is especially useful on imbalanced data, and calibration/threshold optimization are often required for production decisions.
+
+**Q3. Softmax regression vs one-vs-rest for multiclass?**
+
+Softmax regression outputs a probability distribution across K mutually exclusive classes using exp-normalization. It’s a single coherent model with cross-entropy loss. One-vs-rest trains K binary classifiers; it can work but probability outputs may not be consistent or calibrated as a single distribution.
+
+For mutually exclusive classes, softmax is typically preferred; OVR is handy for algorithms without native multiclass support or for certain interpretability constraints.
+
+    ---
+
+    ### Video 74 — Logistic Regression Part 5 | Gradient Descent | Code From Scratch
+
+    **Module:** Classification
+
+    **Summary / what to remember**
+    - Logistic regression from perceptron to sigmoid to loss.
+- Classification metrics; choosing thresholds under cost constraints.
+- Multiclass softmax and nonlinear decision boundaries.
+
+    **Interview Questions + Answers**
+    **Q1. Explain logistic regression end-to-end.**
+
+Logistic regression models log-odds as linear: z = wᵀx + b, converts to probability with sigmoid p = 1/(1+e⁻ᶻ). Training minimizes negative log-likelihood for Bernoulli outcomes, giving binary cross-entropy: -[y log p + (1-y) log(1-p)].
+
+It outputs probabilities, so you should tune the decision threshold based on costs rather than defaulting to 0.5. Regularization and scaling often improve stability and generalization.
+
+**Q2. Accuracy vs precision/recall/F1; when each matters?**
+
+Accuracy fails on imbalance (predicting majority class can look great). Precision controls false positives; recall controls false negatives; F1 balances them. Choose based on cost: medical screening values high recall; spam filters often want high precision; fraud often needs a tradeoff with threshold tuning.
+
+PR-AUC is especially useful on imbalanced data, and calibration/threshold optimization are often required for production decisions.
+
+**Q3. Softmax regression vs one-vs-rest for multiclass?**
+
+Softmax regression outputs a probability distribution across K mutually exclusive classes using exp-normalization. It’s a single coherent model with cross-entropy loss. One-vs-rest trains K binary classifiers; it can work but probability outputs may not be consistent or calibrated as a single distribution.
+
+For mutually exclusive classes, softmax is typically preferred; OVR is handy for algorithms without native multiclass support or for certain interpretability constraints.
+
+    ---
+
+    ### Video 75 — Accuracy + Confusion Matrix | Type 1 & Type 2 Errors | Metrics Part 1
+
+    **Module:** Classification
+
+    **Summary / what to remember**
+    - Logistic regression from perceptron to sigmoid to loss.
+- Classification metrics; choosing thresholds under cost constraints.
+- Multiclass softmax and nonlinear decision boundaries.
+
+    **Interview Questions + Answers**
+    **Q1. Explain logistic regression end-to-end.**
+
+Logistic regression models log-odds as linear: z = wᵀx + b, converts to probability with sigmoid p = 1/(1+e⁻ᶻ). Training minimizes negative log-likelihood for Bernoulli outcomes, giving binary cross-entropy: -[y log p + (1-y) log(1-p)].
+
+It outputs probabilities, so you should tune the decision threshold based on costs rather than defaulting to 0.5. Regularization and scaling often improve stability and generalization.
+
+**Q2. Accuracy vs precision/recall/F1; when each matters?**
+
+Accuracy fails on imbalance (predicting majority class can look great). Precision controls false positives; recall controls false negatives; F1 balances them. Choose based on cost: medical screening values high recall; spam filters often want high precision; fraud often needs a tradeoff with threshold tuning.
+
+PR-AUC is especially useful on imbalanced data, and calibration/threshold optimization are often required for production decisions.
+
+**Q3. Softmax regression vs one-vs-rest for multiclass?**
+
+Softmax regression outputs a probability distribution across K mutually exclusive classes using exp-normalization. It’s a single coherent model with cross-entropy loss. One-vs-rest trains K binary classifiers; it can work but probability outputs may not be consistent or calibrated as a single distribution.
+
+For mutually exclusive classes, softmax is typically preferred; OVR is handy for algorithms without native multiclass support or for certain interpretability constraints.
+
+    ---
+
+    ### Video 76 — Precision, Recall and F1 Score | Metrics Part 2
+
+    **Module:** Classification
+
+    **Summary / what to remember**
+    - Logistic regression from perceptron to sigmoid to loss.
+- Classification metrics; choosing thresholds under cost constraints.
+- Multiclass softmax and nonlinear decision boundaries.
+
+    **Interview Questions + Answers**
+    **Q1. Explain logistic regression end-to-end.**
+
+Logistic regression models log-odds as linear: z = wᵀx + b, converts to probability with sigmoid p = 1/(1+e⁻ᶻ). Training minimizes negative log-likelihood for Bernoulli outcomes, giving binary cross-entropy: -[y log p + (1-y) log(1-p)].
+
+It outputs probabilities, so you should tune the decision threshold based on costs rather than defaulting to 0.5. Regularization and scaling often improve stability and generalization.
+
+**Q2. Accuracy vs precision/recall/F1; when each matters?**
+
+Accuracy fails on imbalance (predicting majority class can look great). Precision controls false positives; recall controls false negatives; F1 balances them. Choose based on cost: medical screening values high recall; spam filters often want high precision; fraud often needs a tradeoff with threshold tuning.
+
+PR-AUC is especially useful on imbalanced data, and calibration/threshold optimization are often required for production decisions.
+
+**Q3. Softmax regression vs one-vs-rest for multiclass?**
+
+Softmax regression outputs a probability distribution across K mutually exclusive classes using exp-normalization. It’s a single coherent model with cross-entropy loss. One-vs-rest trains K binary classifiers; it can work but probability outputs may not be consistent or calibrated as a single distribution.
+
+For mutually exclusive classes, softmax is typically preferred; OVR is handy for algorithms without native multiclass support or for certain interpretability constraints.
+
+    ---
+
+    ### Video 77 — Softmax Regression | Multinomial Logistic Regression
+
+    **Module:** Classification
+
+    **Summary / what to remember**
+    - Logistic regression from perceptron to sigmoid to loss.
+- Classification metrics; choosing thresholds under cost constraints.
+- Multiclass softmax and nonlinear decision boundaries.
+
+    **Interview Questions + Answers**
+    **Q1. Explain logistic regression end-to-end.**
+
+Logistic regression models log-odds as linear: z = wᵀx + b, converts to probability with sigmoid p = 1/(1+e⁻ᶻ). Training minimizes negative log-likelihood for Bernoulli outcomes, giving binary cross-entropy: -[y log p + (1-y) log(1-p)].
+
+It outputs probabilities, so you should tune the decision threshold based on costs rather than defaulting to 0.5. Regularization and scaling often improve stability and generalization.
+
+**Q2. Accuracy vs precision/recall/F1; when each matters?**
+
+Accuracy fails on imbalance (predicting majority class can look great). Precision controls false positives; recall controls false negatives; F1 balances them. Choose based on cost: medical screening values high recall; spam filters often want high precision; fraud often needs a tradeoff with threshold tuning.
+
+PR-AUC is especially useful on imbalanced data, and calibration/threshold optimization are often required for production decisions.
+
+**Q3. Softmax regression vs one-vs-rest for multiclass?**
+
+Softmax regression outputs a probability distribution across K mutually exclusive classes using exp-normalization. It’s a single coherent model with cross-entropy loss. One-vs-rest trains K binary classifiers; it can work but probability outputs may not be consistent or calibrated as a single distribution.
+
+For mutually exclusive classes, softmax is typically preferred; OVR is handy for algorithms without native multiclass support or for certain interpretability constraints.
+
+    ---
+
+    ### Video 78 — Polynomial Features in Logistic Regression | Nonlinear Logistic Regression
+
+    **Module:** Classification
+
+    **Summary / what to remember**
+    - Logistic regression from perceptron to sigmoid to loss.
+- Classification metrics; choosing thresholds under cost constraints.
+- Multiclass softmax and nonlinear decision boundaries.
+
+    **Interview Questions + Answers**
+    **Q1. Explain logistic regression end-to-end.**
+
+Logistic regression models log-odds as linear: z = wᵀx + b, converts to probability with sigmoid p = 1/(1+e⁻ᶻ). Training minimizes negative log-likelihood for Bernoulli outcomes, giving binary cross-entropy: -[y log p + (1-y) log(1-p)].
+
+It outputs probabilities, so you should tune the decision threshold based on costs rather than defaulting to 0.5. Regularization and scaling often improve stability and generalization.
+
+**Q2. Accuracy vs precision/recall/F1; when each matters?**
+
+Accuracy fails on imbalance (predicting majority class can look great). Precision controls false positives; recall controls false negatives; F1 balances them. Choose based on cost: medical screening values high recall; spam filters often want high precision; fraud often needs a tradeoff with threshold tuning.
+
+PR-AUC is especially useful on imbalanced data, and calibration/threshold optimization are often required for production decisions.
+
+**Q3. Softmax regression vs one-vs-rest for multiclass?**
+
+Softmax regression outputs a probability distribution across K mutually exclusive classes using exp-normalization. It’s a single coherent model with cross-entropy loss. One-vs-rest trains K binary classifiers; it can work but probability outputs may not be consistent or calibrated as a single distribution.
+
+For mutually exclusive classes, softmax is typically preferred; OVR is handy for algorithms without native multiclass support or for certain interpretability constraints.
+
+    ---
+
+    ### Video 79 — Logistic Regression Hyperparameters
+
+    **Module:** Classification
+
+    **Summary / what to remember**
+    - Logistic regression from perceptron to sigmoid to loss.
+- Classification metrics; choosing thresholds under cost constraints.
+- Multiclass softmax and nonlinear decision boundaries.
+
+    **Interview Questions + Answers**
+    **Q1. Explain logistic regression end-to-end.**
+
+Logistic regression models log-odds as linear: z = wᵀx + b, converts to probability with sigmoid p = 1/(1+e⁻ᶻ). Training minimizes negative log-likelihood for Bernoulli outcomes, giving binary cross-entropy: -[y log p + (1-y) log(1-p)].
+
+It outputs probabilities, so you should tune the decision threshold based on costs rather than defaulting to 0.5. Regularization and scaling often improve stability and generalization.
+
+**Q2. Accuracy vs precision/recall/F1; when each matters?**
+
+Accuracy fails on imbalance (predicting majority class can look great). Precision controls false positives; recall controls false negatives; F1 balances them. Choose based on cost: medical screening values high recall; spam filters often want high precision; fraud often needs a tradeoff with threshold tuning.
+
+PR-AUC is especially useful on imbalanced data, and calibration/threshold optimization are often required for production decisions.
+
+**Q3. Softmax regression vs one-vs-rest for multiclass?**
+
+Softmax regression outputs a probability distribution across K mutually exclusive classes using exp-normalization. It’s a single coherent model with cross-entropy loss. One-vs-rest trains K binary classifiers; it can work but probability outputs may not be consistent or calibrated as a single distribution.
+
+For mutually exclusive classes, softmax is typically preferred; OVR is handy for algorithms without native multiclass support or for certain interpretability constraints.
+
+    ---
+
+    ### Video 80 — Decision Trees | Entropy | Gini | Information Gain
+
+    **Module:** Decision trees
+
+    **Summary / what to remember**
+    - Tree splitting criteria (entropy/gini) and information gain.
+- Overfitting controls via hyperparameters/pruning.
+- Regression trees and visualization for interpretability.
+
+    **Interview Questions + Answers**
+    **Q1. How do trees choose splits and what are entropy/gini?**
+
+Trees greedily choose splits that reduce impurity. Entropy measures uncertainty (-∑p log p) and Gini measures impurity (1-∑p²). Information gain is impurity(parent) minus weighted impurity(children).
+
+In practice, entropy and gini usually produce similar trees. The key is that splitting is greedy, so trees can overfit without constraints.
+
+**Q2. Why do trees overfit and how to control it?**
+
+Trees can keep splitting until leaves are nearly pure, which can memorize training noise. Control via `max_depth`, `min_samples_leaf`, `min_samples_split`, `max_features`, pruning, and validation-based stopping.
+
+Interview-ready: relate this to bias-variance and explain that ensembles of trees (RF/GBM) often generalize better than a single deep tree.
+
+**Q3. Regression trees vs classification trees?**
+
+Same structure, different objective. Regression trees minimize variance/MSE within leaves and predict the mean target in each leaf. Classification trees minimize class impurity and output majority class or class probabilities.
+
+Regression trees produce piecewise-constant predictions; ensembles help capture smoother functions.
+
+    ---
+
+    ### Video 81 — Decision Trees Hyperparameters | Overfitting/Underfitting
+
+    **Module:** Decision trees
+
+    **Summary / what to remember**
+    - Tree splitting criteria (entropy/gini) and information gain.
+- Overfitting controls via hyperparameters/pruning.
+- Regression trees and visualization for interpretability.
+
+    **Interview Questions + Answers**
+    **Q1. How do trees choose splits and what are entropy/gini?**
+
+Trees greedily choose splits that reduce impurity. Entropy measures uncertainty (-∑p log p) and Gini measures impurity (1-∑p²). Information gain is impurity(parent) minus weighted impurity(children).
+
+In practice, entropy and gini usually produce similar trees. The key is that splitting is greedy, so trees can overfit without constraints.
+
+**Q2. Why do trees overfit and how to control it?**
+
+Trees can keep splitting until leaves are nearly pure, which can memorize training noise. Control via `max_depth`, `min_samples_leaf`, `min_samples_split`, `max_features`, pruning, and validation-based stopping.
+
+Interview-ready: relate this to bias-variance and explain that ensembles of trees (RF/GBM) often generalize better than a single deep tree.
+
+**Q3. Regression trees vs classification trees?**
+
+Same structure, different objective. Regression trees minimize variance/MSE within leaves and predict the mean target in each leaf. Classification trees minimize class impurity and output majority class or class probabilities.
+
+Regression trees produce piecewise-constant predictions; ensembles help capture smoother functions.
+
+    ---
+
+    ### Video 82 — Regression Trees
+
+    **Module:** Decision trees
+
+    **Summary / what to remember**
+    - Tree splitting criteria (entropy/gini) and information gain.
+- Overfitting controls via hyperparameters/pruning.
+- Regression trees and visualization for interpretability.
+
+    **Interview Questions + Answers**
+    **Q1. How do trees choose splits and what are entropy/gini?**
+
+Trees greedily choose splits that reduce impurity. Entropy measures uncertainty (-∑p log p) and Gini measures impurity (1-∑p²). Information gain is impurity(parent) minus weighted impurity(children).
+
+In practice, entropy and gini usually produce similar trees. The key is that splitting is greedy, so trees can overfit without constraints.
+
+**Q2. Why do trees overfit and how to control it?**
+
+Trees can keep splitting until leaves are nearly pure, which can memorize training noise. Control via `max_depth`, `min_samples_leaf`, `min_samples_split`, `max_features`, pruning, and validation-based stopping.
+
+Interview-ready: relate this to bias-variance and explain that ensembles of trees (RF/GBM) often generalize better than a single deep tree.
+
+**Q3. Regression trees vs classification trees?**
+
+Same structure, different objective. Regression trees minimize variance/MSE within leaves and predict the mean target in each leaf. Classification trees minimize class impurity and output majority class or class probabilities.
+
+Regression trees produce piecewise-constant predictions; ensembles help capture smoother functions.
+
+    ---
+
+    ### Video 83 — Decision Tree Visualization using dtreeviz
+
+    **Module:** Decision trees
+
+    **Summary / what to remember**
+    - Tree splitting criteria (entropy/gini) and information gain.
+- Overfitting controls via hyperparameters/pruning.
+- Regression trees and visualization for interpretability.
+
+    **Interview Questions + Answers**
+    **Q1. How do trees choose splits and what are entropy/gini?**
+
+Trees greedily choose splits that reduce impurity. Entropy measures uncertainty (-∑p log p) and Gini measures impurity (1-∑p²). Information gain is impurity(parent) minus weighted impurity(children).
+
+In practice, entropy and gini usually produce similar trees. The key is that splitting is greedy, so trees can overfit without constraints.
+
+**Q2. Why do trees overfit and how to control it?**
+
+Trees can keep splitting until leaves are nearly pure, which can memorize training noise. Control via `max_depth`, `min_samples_leaf`, `min_samples_split`, `max_features`, pruning, and validation-based stopping.
+
+Interview-ready: relate this to bias-variance and explain that ensembles of trees (RF/GBM) often generalize better than a single deep tree.
+
+**Q3. Regression trees vs classification trees?**
+
+Same structure, different objective. Regression trees minimize variance/MSE within leaves and predict the mean target in each leaf. Classification trees minimize class impurity and output majority class or class probabilities.
+
+Regression trees produce piecewise-constant predictions; ensembles help capture smoother functions.
+
+    ---
+
+    ### Video 84 — Introduction to Ensemble Learning
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 85 — Voting Ensemble Part 1 | Core idea
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 86 — Voting Ensemble Part 2 | Classification | Hard vs Soft Voting
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 87 — Voting Ensemble Part 3 | Regression
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 88 — Bagging Part 1 | Intro
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 89 — Bagging Part 2 | Bagging Classifiers
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 90 — Bagging Part 3 | Bagging Regressor
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 91 — Random Forest | Intuition
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 92 — Why Random Forest performs so well? Bias/Variance
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 93 — Bagging vs Random Forest
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 94 — Random Forest Hyperparameters
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 95 — RF Hyperparameter Tuning (GridSearchCV & RandomizedSearchCV)
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 96 — OOB Score | Out of Bag Evaluation
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 97 — Feature Importance in RF & Trees
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 98 — AdaBoost Classifier | Geometric Intuition
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 99 — AdaBoost | Step-by-step Explanation
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
+
+    ### Video 100 — AdaBoost Algorithm | Code from Scratch
+
+    **Module:** Ensembles
+
+    **Summary / what to remember**
+    - Ensembles: voting, bagging, random forests, boosting (AdaBoost).
+- Why ensembles work: diversity + aggregation; bias/variance effects.
+- Tuning, OOB evaluation, and feature importance caveats.
+
+    **Interview Questions + Answers**
+    **Q1. Why do ensembles work? Bagging vs boosting?**
+
+Ensembles work when base models make different errors. Aggregation (averaging/voting) reduces variance and stabilizes predictions. Bagging trains models independently on bootstrapped samples and aggregates; it mainly reduces variance.
+
+Boosting trains sequentially, where each new learner focuses on correcting previous errors; it can reduce bias and create strong learners from weak ones, but needs regularization and careful tuning to avoid overfitting/noise sensitivity.
+
+**Q2. Explain Random Forest and why feature randomness helps.**
+
+Random Forest uses bootstrap sampling (bagging) and random feature subsets at each split. Feature randomness decorrelates trees, because otherwise many trees would choose the same strong features early and look similar. Less correlation means averaging reduces variance more effectively.
+
+Key knobs: number of trees, max_depth, max_features, min_samples_leaf. OOB scoring provides an internal validation estimate without a separate validation set (though you should still keep a final test set).
+
+**Q3. Explain AdaBoost step-by-step and what alpha means.**
+
+AdaBoost maintains weights on samples. Initially all weights are equal. Train a weak learner; increase weights for misclassified samples so the next learner focuses on hard cases. Compute learner weight alpha based on its error—better learners get larger alpha. Final prediction is a weighted vote of learners.
+
+AdaBoost can be sensitive to noise/outliers because hard points get repeatedly up-weighted. That’s why modern gradient boosting methods often add regularization, subsampling, and more robust loss handling.
+
+    ---
 ## Advanced topics addendum (Videos 101–134)
 
-> **Important note:** I could only retrieve the official playlist listing up to **Video 100** within this session’s accessible sources.  
-> The playlist itself contains **134 videos**, so there are **34 more videos (101–134)** beyond AdaBoost.  
-> I’m including this addendum so you still have interview-ready notes for the most likely “next topics” that typically follow AdaBoost in this course family (boosting extensions, SVM, clustering, etc.).  
-> If you paste the titles of videos 101–134, I can map this addendum precisely to each remaining video.
+The playlist contains videos beyond #100, but their exact titles were not available in this session.
+To complete this README perfectly (without missing any topic/video), paste the titles of videos **101–134** and I’ll generate the remaining sections in the exact same format (summary + interview Q/A).
 
-### Gradient Boosting (GBM)
-- Boosting but instead of reweighting points, you add new learners that fit the **residuals** (errors) of the current model.
-- For squared loss:
-  - Start with constant model \(F_0(x)=\bar y\)
-  - Residuals \(r_i = y_i - F_{m-1}(x_i)\)
-  - Fit weak learner \(h_m(x)\) to residuals
-  - Update \(F_m(x)=F_{m-1}(x)+\eta h_m(x)\)
-- Hyperparameters:
-  - n_estimators, learning_rate \(\eta\), max_depth (base tree), subsample
-- Interview: explain why small learning_rate + more trees often generalize better.
-
-### XGBoost (Extremely Gradient Boosting)
-- Optimized gradient boosting with:
-  - regularization
-  - efficient tree growth
-  - handling missing values
-  - parallelization + shrinkage
-- Intuition:
-  - each tree corrects errors of prior trees
-  - objective = loss + regularization (controls complexity)
-- Key knobs:
-  - `eta`, `max_depth`, `min_child_weight`, `subsample`, `colsample_bytree`, `reg_lambda`, `reg_alpha`
-
-### Stacking / Blending
-- Train multiple base models, then train a **meta-learner** on their predictions.
-- Must avoid leakage:
-  - use out-of-fold predictions for meta model
-- Works best when base models are diverse.
-
-### Support Vector Machines (SVM)
-- Goal: find hyperplane with **maximum margin**.
-- Hard margin vs soft margin (C controls tolerance to misclassification).
-- Kernel trick:
-  - implicitly map to high dimensional feature space.
-  - common kernels: linear, RBF, polynomial.
-- Scaling is critical; SVM sensitive to feature scale.
-
-### k-Nearest Neighbors (kNN)
-- Instance-based, non-parametric.
-- Choose `k`, distance metric; normalize features.
-- Pros: simple. Cons: slow prediction, curse of dimensionality.
-
-### Naive Bayes
-- Bayes rule: \(P(y|x)\propto P(x|y)P(y)\)
-- Naive assumption: features conditionally independent given class.
-- Variants:
-  - Gaussian NB (continuous)
-  - Multinomial NB (counts/text)
-  - Bernoulli NB (binary)
-- Strong baseline for text classification.
-
-### Clustering: KMeans, Hierarchical, DBSCAN
-- **KMeans:**
-  - iterative assign → update centroids
-  - choose K (elbow, silhouette)
-  - sensitive to scaling and initialization
-- **Hierarchical:**
-  - agglomerative clustering; linkage (single/complete/average/ward)
-  - dendrogram helps choose number of clusters
-- **DBSCAN:**
-  - density-based; finds arbitrary shapes; identifies noise points
-  - parameters: eps, min_samples
-
-### Imbalanced data handling
-- Problems: accuracy lies, minority recall suffers.
-- Fixes:
-  - better metrics: F1, PR-AUC, balanced accuracy
-  - resampling: oversample (SMOTE), undersample
-  - class weights
-  - threshold tuning, calibrated probabilities
-
-### Hyperparameter tuning (general)
-- Use:
-  - train/val split or cross-val
-  - `RandomizedSearchCV` / Bayesian optimization (Optuna)
-- Always tune **with the same pipeline** as training.
-- Treat tuning as an experiment with tracked configs + seeds.
+Likely topics after AdaBoost (common in this course family):
+- Gradient Boosting (GBM), XGBoost/LightGBM/CatBoost
+- Stacking / blending
+- SVM and kernels
+- kNN, Naive Bayes
+- Clustering (KMeans, Hierarchical, DBSCAN)
+- Imbalanced learning, calibration, threshold optimization
+- Hyperparameter tuning (random search, Bayesian optimization)
 
 ---
-
-## Interview cheat sheet
-
-### 1) Problem framing questions (always start here)
-- What is the target? How is it defined & collected?
-- What type of problem (classification/regression/ranking/forecasting)?
-- What metric matches business cost? What are FP/FN costs?
-- What is the baseline?
-
-### 2) Leakage checklist
-- Any feature derived from future info?
-- Did you fit scalers/encoders on full data?
-- Did you impute using info from the test set?
-- Time series split needed?
-
-### 3) Preprocessing defaults (tabular)
-- Numeric: impute (median) → scale (standardize or robust)
-- Categorical: impute (“missing”) → one-hot (or target encoding if high-cardinality)
-- Use ColumnTransformer + Pipeline.
-
-### 4) Model selection heuristics (tabular)
-- Start simple:
-  - Logistic/linear regression for interpretability + baseline
-  - Tree-based models for nonlinearity + interactions
-  - Random forest / gradient boosting for strong performance on tabular
-- If many features / high dimension:
-  - regularization (ridge/lasso)
-  - PCA if needed for compression (but validate performance)
-
-### 5) Metrics quick map
-- Regression: MAE (robust), RMSE (big errors), R² (explained variance)
-- Classification:
-  - balanced? accuracy ok
-  - imbalanced? precision/recall/F1, PR-AUC, ROC-AUC
-  - calibrate thresholds based on cost.
-
-### 6) Common “tell me about X” answers
-- **Bias vs variance:** underfit vs overfit; fixes for each.
-- **Regularization:** add penalty to control complexity → better generalization.
-- **Ensembles:** diversity + aggregation reduces error; bagging reduces variance; boosting reduces bias.
-
----
-
-## Video checklist (1–100)
-
-> Tick as you revise.
-
-- [ ] 1. What is Machine Learning? | 100 Days of Machine Learning
-- [ ] 2. AI Vs ML Vs DL for Beginners in Hindi
-- [ ] 3. Types of Machine Learning for Beginners | Types of ML in Depth
-- [ ] 4. Batch Machine Learning | Offline Vs Online Learning | Machine Learning Types
-- [ ] 5. Online Machine Learning | Online Vs Offline Machine Learning
-- [ ] 6. Instance-Based Vs Model-Based Learning | Types of Machine Learning
-- [ ] 7. Challenges in Machine Learning | Problems in Machine Learning
-- [ ] 8. Application of Machine Learning | Real Life Machine Learning Applications
-- [ ] 9. Machine Learning Development Life Cycle | MLDLC in Data Science
-- [ ] 10. Data Engineer Vs Data Analyst Vs Data Scientist Vs ML Engineer | Data Science Job Roles
-- [ ] 11. What are Tensors | Tensor In-depth Explanation | Tensor in Machine Learning
-- [ ] 12. Installing Anaconda | Jupyter Notebook | Google Colab for ML
-- [ ] 13. End to End Toy Project | Day 13 | 100 Days of Machine Learning
-- [ ] 14. How to Frame a Machine Learning Problem | Plan a Data Science Project
-- [ ] 15. Working with CSV files | Day 15
-- [ ] 16. Working with JSON/SQL | Day 16
-- [ ] 17. Fetching Data From an API | Day 17
-- [ ] 18. Fetching data using Web Scraping | Day 18
-- [ ] 19. Understanding Your Data | Day 19
-- [ ] 20. EDA using Univariate Analysis | Day 20
-- [ ] 21. EDA using Bivariate and Multivariate Analysis | Day 21
-- [ ] 22. Pandas Profiling | Day 22
-- [ ] 23. What is Feature Engineering | Day 23
-- [ ] 24. Feature Scaling - Standardization | Day 24
-- [ ] 25. Feature Scaling - Normalization | MinMaxScaling | MaxAbsScaling | RobustScaling
-- [ ] 26. Encoding Categorical Data | Ordinal Encoding | Label Encoding
-- [ ] 27. One Hot Encoding | Handling Categorical Data | Day 27
-- [ ] 28. Column Transformer in Machine Learning | ColumnTransformer in Sklearn
-- [ ] 29. Machine Learning Pipelines A-Z | Day 29
-- [ ] 30. Function Transformer | Log / Reciprocal / Square Root Transform
-- [ ] 31. Power Transformer | Box-Cox | Yeo-Johnson
-- [ ] 32. Binning and Binarization | Discretization | Quantile / KMeans Binning
-- [ ] 33. Handling Mixed Variables | Feature Engineering
-- [ ] 34. Handling Date and Time Variables | Day 34
-- [ ] 35. Handling Missing Data | Part 1 | Complete Case Analysis
-- [ ] 36. Handling missing data | Numerical Data | Simple Imputer
-- [ ] 37. Handling Missing Categorical Data | Most Frequent | Missing Category
-- [ ] 38. Missing Indicator | Random Sample Imputation | Part 4
-- [ ] 39. KNN Imputer | Multivariate Imputation | Part 5
-- [ ] 40. MICE / Iterative Imputer | Multivariate Imputation by Chained Equations
-- [ ] 41. What are Outliers | Outliers in Machine Learning
-- [ ] 42. Outlier Detection/Removal using Z-score | Part 2
-- [ ] 43. Outlier Detection/Removal using IQR | Part 3
-- [ ] 44. Outlier Detection using Percentiles | Winsorization
-- [ ] 45. Feature Construction | Feature Splitting
-- [ ] 46. Curse of Dimensionality
-- [ ] 47. PCA Part 1 | Geometric Intuition
-- [ ] 48. PCA Part 2 | Formulation + Step-by-step
-- [ ] 49. PCA Part 3 | Code Example + Visualization
-- [ ] 50. Simple Linear Regression | Code + Intuition
-- [ ] 51. Simple Linear Regression | Mathematical Formulation | Scratch
-- [ ] 52. Regression Metrics | MSE, MAE, RMSE, R2, Adjusted R2
-- [ ] 53. Multiple Linear Regression | Geometric Intuition & Code
-- [ ] 54. Multiple Linear Regression | Part 2 | Mathematical Formulation
-- [ ] 55. Multiple Linear Regression | Part 3 | Code From Scratch
-- [ ] 56. Gradient Descent From Scratch | End-to-end + Animation
-- [ ] 57. Batch Gradient Descent | Code demo
-- [ ] 58. Stochastic Gradient Descent
-- [ ] 59. Mini-Batch Gradient Descent
-- [ ] 60. Polynomial Regression
-- [ ] 61. Bias Variance Trade-off | Overfitting vs Underfitting
-- [ ] 62. Ridge Regression Part 1 | Intuition + Code
-- [ ] 63. Ridge Regression Part 2 | Math + Scratch
-- [ ] 64. Ridge Regression Part 3 | Gradient Descent
-- [ ] 65. Ridge Regression Part 4 | 5 Key Points
-- [ ] 66. Lasso Regression | Intuition + Code
-- [ ] 67. Why Lasso creates sparsity?
-- [ ] 68. ElasticNet Regression | Intuition + Code
-- [ ] 69. Logistic Regression Part 1 | Perceptron Trick
-- [ ] 70. Logistic Regression Part 2 | Perceptron Trick Code
-- [ ] 71. Logistic Regression Part 3 | Sigmoid Function
-- [ ] 72. Logistic Regression Part 4 | Loss Function | MLE | Binary Cross Entropy
-- [ ] 73. Derivative of Sigmoid Function
-- [ ] 74. Logistic Regression Part 5 | Gradient Descent | Code From Scratch
-- [ ] 75. Accuracy + Confusion Matrix | Type 1 & Type 2 Errors | Metrics Part 1
-- [ ] 76. Precision, Recall and F1 Score | Metrics Part 2
-- [ ] 77. Softmax Regression | Multinomial Logistic Regression
-- [ ] 78. Polynomial Features in Logistic Regression | Nonlinear Logistic Regression
-- [ ] 79. Logistic Regression Hyperparameters
-- [ ] 80. Decision Trees | Entropy | Gini | Information Gain
-- [ ] 81. Decision Trees Hyperparameters | Overfitting/Underfitting
-- [ ] 82. Regression Trees
-- [ ] 83. Decision Tree Visualization using dtreeviz
-- [ ] 84. Introduction to Ensemble Learning
-- [ ] 85. Voting Ensemble Part 1 | Core idea
-- [ ] 86. Voting Ensemble Part 2 | Classification | Hard vs Soft Voting
-- [ ] 87. Voting Ensemble Part 3 | Regression
-- [ ] 88. Bagging Part 1 | Intro
-- [ ] 89. Bagging Part 2 | Bagging Classifiers
-- [ ] 90. Bagging Part 3 | Bagging Regressor
-- [ ] 91. Random Forest | Intuition
-- [ ] 92. Why Random Forest performs so well? Bias/Variance
-- [ ] 93. Bagging vs Random Forest
-- [ ] 94. Random Forest Hyperparameters
-- [ ] 95. RF Hyperparameter Tuning (GridSearchCV & RandomizedSearchCV)
-- [ ] 96. OOB Score | Out of Bag Evaluation
-- [ ] 97. Feature Importance in RF & Trees
-- [ ] 98. AdaBoost Classifier | Geometric Intuition
-- [ ] 99. AdaBoost | Step-by-step Explanation
-- [ ] 100. AdaBoost Algorithm | Code from Scratch
- 
