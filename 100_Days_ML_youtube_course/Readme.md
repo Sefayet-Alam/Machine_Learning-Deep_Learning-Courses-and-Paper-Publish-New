@@ -1,4 +1,4 @@
-# 100 Days of Machine Learning (CampusX) — Updated Interview‑Ready Readme
+# 100 Days of Machine Learning (CampusX) 
 
 This README is designed to be *revision-friendly* and *interview-ready*.
 
