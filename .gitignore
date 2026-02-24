@@ -3,7 +3,6 @@
 
 # Python
 __pycache__/
-*.py[cod]
 *.pyd
 *.so
 *.egg-info/
@@ -15,8 +14,7 @@ dist/
 venv/
 env/
 
-# Jupyter
-.ipynb_checkpoints/
+
 
 # IDEs
 .vscode/
