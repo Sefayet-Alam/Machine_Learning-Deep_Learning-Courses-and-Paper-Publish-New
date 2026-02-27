@@ -366,57 +366,20 @@ ls -la
 ls -la /content | head
 
 # ------------------------------------------------------------------------------
-# 3) Install Kaggle CLI and configure credentials
+# 3) In collab:
 # ------------------------------------------------------------------------------
-pip -q install kaggle
+ls -la /content | head
 
-mkdir -p ~/.kaggle
-cp /content/kaggle.json ~/.kaggle/
-chmod 600 ~/.kaggle/kaggle.json
+!pip -q install kaggle
+!mkdir -p ~/.kaggle
+!cp /content/kaggle.json ~/.kaggle/
+!chmod 600 ~/.kaggle/kaggle.json
 
-# Quick check: the file should exist and be permissioned
-ls -la ~/.kaggle/kaggle.json
+# Download + unzip dataset
+!mkdir -p /content/dataset
+!kaggle datasets download -d amar5693/screen-time-sleep-and-stress-analysis-dataset -p /content/dataset --unzip
+!ls -la /content/dataset
 
-# ------------------------------------------------------------------------------
-# 4) Download and unzip the dataset into /content/dataset
-# ------------------------------------------------------------------------------
-mkdir -p /content/dataset
-
-kaggle datasets download \
-  -d amar5693/screen-time-sleep-and-stress-analysis-dataset \
-  -p /content/dataset \
-  --unzip
-
-# ------------------------------------------------------------------------------
-# 5) Verify download
-# ------------------------------------------------------------------------------
-echo "✅ Dataset files:"
-find /content/dataset -maxdepth 2 -type f -print
-
-# If you'd rather just list:
-ls -la /content/dataset
-
-# ------------------------------------------------------------------------------
-# 6) (Optional) If you want the data to persist, save it to Google Drive
-# ------------------------------------------------------------------------------
-# Colab runtime storage resets when the session ends.
-# To keep the dataset, mount Google Drive and download there.
-
-# NOTE: The following two lines require the Colab environment and will prompt auth.
-python - <<'PY'
-from google.colab import drive
-drive.mount('/content/drive')
-PY
-
-mkdir -p "/content/drive/MyDrive/kaggle_datasets/screen_time_sleep_stress"
-
-kaggle datasets download \
-  -d amar5693/screen-time-sleep-and-stress-analysis-dataset \
-  -p "/content/drive/MyDrive/kaggle_datasets/screen_time_sleep_stress" \
-  --unzip
-
-echo "✅ Drive location contents:"
-ls -la "/content/drive/MyDrive/kaggle_datasets/screen_time_sleep_stress"
 
 # ------------------------------------------------------------------------------
 # Troubleshooting tips
