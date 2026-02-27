@@ -337,6 +337,99 @@ Global installation causes version conflicts and breaks reproducibility. In ML, 
 **Q2. When would you use Colab instead of local Jupyter, and what problems do you watch out for?**  
 I use Colab when I need free/quick access to GPUs/TPUs or when I want a lightweight setup without local installation issues. The main problems: the runtime is temporary (files and installed packages reset), GPU availability can change, and long trainings can disconnect. To manage that, I keep a setup cell that installs dependencies, store data/models on Drive or a persistent bucket, log experiments (e.g., to a file or tracking tool), and version control the notebook or convert it to scripts for reliability.
 
+# ==============================================================================
+# ✅ Step-by-step: Download a Kaggle dataset into Google Colab using Kaggle API
+# Dataset: https://www.kaggle.com/datasets/amar5693/screen-time-sleep-and-stress-analysis-dataset
+# Kaggle slug: amar5693/screen-time-sleep-and-stress-analysis-dataset
+# ==============================================================================
+
+# 0) (Colab) Optional but recommended: check where you are
+pwd
+ls -la
+
+# ------------------------------------------------------------------------------
+# 1) Create your Kaggle API token (done on Kaggle website)
+# ------------------------------------------------------------------------------
+# 1.1 Open: https://www.kaggle.com/account
+# 1.2 Scroll to the "API" section
+# 1.3 Click "Create New API Token"
+# 1.4 A file named "kaggle.json" will download to your computer
+
+# ------------------------------------------------------------------------------
+# 2) Upload kaggle.json into Colab
+# ------------------------------------------------------------------------------
+# In Google Colab:
+#   Left sidebar → Files → Upload → select "kaggle.json"
+#
+# After uploading, it usually appears in /content
+ls -la /content | head
+
+# ------------------------------------------------------------------------------
+# 3) Install Kaggle CLI and configure credentials
+# ------------------------------------------------------------------------------
+pip -q install kaggle
+
+mkdir -p ~/.kaggle
+cp /content/kaggle.json ~/.kaggle/
+chmod 600 ~/.kaggle/kaggle.json
+
+# Quick check: the file should exist and be permissioned
+ls -la ~/.kaggle/kaggle.json
+
+# ------------------------------------------------------------------------------
+# 4) Download and unzip the dataset into /content/dataset
+# ------------------------------------------------------------------------------
+mkdir -p /content/dataset
+
+kaggle datasets download \
+  -d amar5693/screen-time-sleep-and-stress-analysis-dataset \
+  -p /content/dataset \
+  --unzip
+
+# ------------------------------------------------------------------------------
+# 5) Verify download
+# ------------------------------------------------------------------------------
+echo "✅ Dataset files:"
+find /content/dataset -maxdepth 2 -type f -print
+
+# If you'd rather just list:
+ls -la /content/dataset
+
+# ------------------------------------------------------------------------------
+# 6) (Optional) If you want the data to persist, save it to Google Drive
+# ------------------------------------------------------------------------------
+# Colab runtime storage resets when the session ends.
+# To keep the dataset, mount Google Drive and download there.
+
+# NOTE: The following two lines require the Colab environment and will prompt auth.
+python - <<'PY'
+from google.colab import drive
+drive.mount('/content/drive')
+PY
+
+mkdir -p "/content/drive/MyDrive/kaggle_datasets/screen_time_sleep_stress"
+
+kaggle datasets download \
+  -d amar5693/screen-time-sleep-and-stress-analysis-dataset \
+  -p "/content/drive/MyDrive/kaggle_datasets/screen_time_sleep_stress" \
+  --unzip
+
+echo "✅ Drive location contents:"
+ls -la "/content/drive/MyDrive/kaggle_datasets/screen_time_sleep_stress"
+
+# ------------------------------------------------------------------------------
+# Troubleshooting tips
+# ------------------------------------------------------------------------------
+# - If you get "403" or authentication errors:
+#     * Re-upload kaggle.json
+#     * Ensure it is copied to ~/.kaggle/kaggle.json
+#     * Ensure permissions are: chmod 600 ~/.kaggle/kaggle.json
+#
+# - If unzip fails, remove --unzip and unzip manually:
+#     kaggle datasets download -d amar5693/screen-time-sleep-and-stress-analysis-dataset -p /content/dataset
+#     unzip -o /content/dataset/*.zip -d /content/dataset
+# ==============================================================================
+
 ---
 
 ### Video 13 — End to End Toy Project | Day 13 :contentReference[oaicite:3]{index=3}
