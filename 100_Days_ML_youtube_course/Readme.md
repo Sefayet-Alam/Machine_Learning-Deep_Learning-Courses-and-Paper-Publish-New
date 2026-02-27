@@ -337,6 +337,7 @@ Global installation causes version conflicts and breaks reproducibility. In ML, 
 **Q2. When would you use Colab instead of local Jupyter, and what problems do you watch out for?**  
 I use Colab when I need free/quick access to GPUs/TPUs or when I want a lightweight setup without local installation issues. The main problems: the runtime is temporary (files and installed packages reset), GPU availability can change, and long trainings can disconnect. To manage that, I keep a setup cell that installs dependencies, store data/models on Drive or a persistent bucket, log experiments (e.g., to a file or tracking tool), and version control the notebook or convert it to scripts for reliability.
 
+``` bash
 # ==============================================================================
 # ✅ Step-by-step: Download a Kaggle dataset into Google Colab using Kaggle API
 # Dataset: https://www.kaggle.com/datasets/amar5693/screen-time-sleep-and-stress-analysis-dataset
@@ -429,7 +430,7 @@ ls -la "/content/drive/MyDrive/kaggle_datasets/screen_time_sleep_stress"
 #     kaggle datasets download -d amar5693/screen-time-sleep-and-stress-analysis-dataset -p /content/dataset
 #     unzip -o /content/dataset/*.zip -d /content/dataset
 # ==============================================================================
-
+```
 ---
 
 ### Video 13 — End to End Toy Project | Day 13 :contentReference[oaicite:3]{index=3}
