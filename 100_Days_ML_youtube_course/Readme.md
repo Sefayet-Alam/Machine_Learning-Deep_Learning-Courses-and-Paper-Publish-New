@@ -7,9 +7,7 @@ This README is designed to be *revision-friendly* and *interview-ready*.
 ---
 
 ## Notes by video (1–100)
-## Foundations (Videos 1–14)
 
----
 
 ### Video 1 — What is Machine Learning?
 
