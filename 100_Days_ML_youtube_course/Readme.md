@@ -368,8 +368,6 @@ ls -la /content | head
 # ------------------------------------------------------------------------------
 # 3) In collab:
 # ------------------------------------------------------------------------------
-ls -la /content | head
-
 !pip -q install kaggle
 !mkdir -p ~/.kaggle
 !cp /content/kaggle.json ~/.kaggle/
