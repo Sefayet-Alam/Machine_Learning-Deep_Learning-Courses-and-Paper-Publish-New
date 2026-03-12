@@ -1,545 +1,634 @@
-# 7-Day ML/DL Paper Plan
+# Intensive 7-Day Dual-Paper Plan
 
-A realistic and focused 7-day plan to help me:
+**Goal for this week:** make serious progress on **both papers**:
 
-1. Build enough understanding of the most relevant ML/DL/NLP topics.
-2. Complete a **strong paper draft on Bangla cyberbullying detection**.
-3. Build a **solid thesis-aligned foundation for multimodal sarcasm detection**.
-4. Finish the week with working models, results, figures, and a reproducible project structure.
+1. **Thesis paper:** multimodal sarcasm detection based on cue learning / CLIP-style multimodal modeling, with proper model development and updated experiments.
+2. **Second paper:** Bangla cyberbullying detection with strong ML/DL baselines and a submission-ready first draft.
 
-> **Main recommendation for this week:** focus primarily on **Bangla Cyberbullying Detection using Classical ML + Transformer Baselines**, because Bangla multimodal sarcasm data is scarce and hard to build properly within a week.
->
-> **Secondary thesis track:** build understanding and a starter pipeline for **multimodal sarcasm detection using CLIP-based cue learning**, using an existing English benchmark first.
+By the end of 7 days, the target is:
+
+- working **ML/DL models** for both papers
+- **first submissionable drafts** for both papers (not final, but serious)
+- solid understanding of the **required topics only**
 
 ---
 
-## Final Strategy
+## Final strategy
 
-### Primary Paper to Finish This Week
+Because your thesis teacher wants a **proper sarcasm-detection model like the one in the paper, with improvements**, this week should be split into **two active tracks every day**:
+
+### Track A — Thesis paper (highest priority)
+**Topic:** Multimodal sarcasm detection based on cue learning / CLIP-style multimodal modeling
+
+### Track B — Second paper
+**Topic:** Bangla cyberbullying detection using strong classical + transformer baselines
+
+This is an **intensive** plan, not a light one. It assumes you can give the week fully.
+
+---
+
+# What success looks like by Day 7
+
+## Paper 1 — Thesis sarcasm paper
+You should have:
+- a working multimodal pipeline
+- at least 2-3 baselines
+- one improved model direction over a simple baseline
+- ablation/error analysis
+- first full draft of the paper
+- clear understanding of CLIP, multimodal fusion, cue learning, prompt tuning, and evaluation
+
+## Paper 2 — Cyberbullying paper
+You should have:
+- cleaned Bangla dataset
+- classical ML baselines
+- transformer baseline
+- comparison table
+- error analysis
+- first full draft of the paper
+- clear understanding of text classification workflow for Bangla
+
+---
+
+# Tools / stack to use
+
+## For sarcasm paper
+- Python
+- PyTorch
+- Hugging Face Transformers
+- CLIP / OpenCLIP
+- scikit-learn
+- pandas, numpy, matplotlib
+
+## For cyberbullying paper
+- Python
+- scikit-learn
+- Hugging Face Transformers
+- pandas, numpy, matplotlib
+
+---
+
+# Main paper ideas
+
+## Paper 1 (thesis)
+**Working title:**
+**Multimodal Sarcasm Detection with Cue Learning: Reproduction, Adaptation, and Low-Resource Extensions**
+
+Possible contribution this week:
+- reproduce a simplified version of the cue-learning idea
+- compare text-only vs image-only vs multimodal
+- compare simple CLIP fusion vs prompt/cue-enhanced version
+- provide error analysis and limitations
+- optionally add small Bangla/Banglish pilot ideas in the discussion section
+
+## Paper 2
+**Working title:**
 **Bangla Cyberbullying Detection using Classical ML and Transformer Baselines**
 
-Why this is the best choice:
-- Bangla cyberbullying datasets already exist.
-- The task is feasible within 7 days.
-- You can implement both classical ML baselines and transformer baselines quickly.
-- It is much more practical than trying to build a high-quality Bangla multimodal sarcasm dataset from scratch in one week.
-
-### Secondary / Thesis-Aligned Track
-**Multimodal Sarcasm Detection using CLIP-based Cue Learning**
-
-Why this stays important:
-- It aligns directly with the thesis topic.
-- The reference paper uses CLIP + cue/prompt learning.
-- This week, the realistic goal is to understand it deeply and prepare a starter implementation path.
+Possible contribution this week:
+- benchmark strong baselines on Bangla data
+- compare classical vs transformer models
+- analyze failure cases and label ambiguity
 
 ---
 
-## Day 01 — Build the Foundation You Actually Need
+# 7-Day Intensive Plan
 
-### To Read
-1. **Reference paper**
+## Day 01 — Build foundations for both papers
+
+### To read
+
+#### For thesis sarcasm paper
+1. Reference paper:
    - [A multi-modal sarcasm detection model based on cue learning](https://www.nature.com/articles/s41598-025-94266-w.pdf)
+2. Multimodal sarcasm dataset quality / benchmark awareness:
+   - [MMSD2.0 paper](https://aclanthology.org/2023.findings-acl.689/)
+   - [MMSD2.0 repository](https://github.com/joeying1019/mmsd2.0)
+3. CLIP basics:
+   - [OpenAI CLIP repository](https://github.com/openai/CLIP)
 
-2. **Transformer basics**
-   - [Hugging Face — Natural Language Processing and Large Language Models](https://huggingface.co/learn/llm-course/en/chapter1/2)
-   - [Hugging Face — How do Transformers work?](https://huggingface.co/learn/llm-course/en/chapter1/4)
+#### For cyberbullying paper
+1. Bangla cyberbullying dataset paper:
+   - [Bengali cyberbullying detection dataset](https://www.sciencedirect.com/science/article/pii/S2352340925009266)
+2. Dataset sources:
+   - [Mendeley dataset](https://data.mendeley.com/datasets/sz5558wrd4/2)
+   - [Kaggle Bangla cyberbullying dataset](https://www.kaggle.com/datasets/moshiurrahmanfaisal/bangla-cyber-bullying-dataset)
 
-3. **Classification and evaluation basics**
-   - [Google ML Crash Course — Classification](https://developers.google.com/machine-learning/crash-course/classification)
-   - [Google ML Crash Course — Accuracy, Precision, Recall](https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall)
+#### For both papers
+1. Transformer basics:
+   - [Hugging Face NLP course](https://huggingface.co/learn/llm-course/en/chapter1/2)
+   - [How transformers work](https://huggingface.co/learn/llm-course/en/chapter1/4)
+2. Classification metrics:
+   - [Google ML Crash Course - Classification](https://developers.google.com/machine-learning/crash-course/classification)
+   - [Accuracy, Precision, Recall](https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall)
 
-### To Watch
-1. [CampusX — 100 Days ML playlist](https://www.youtube.com/playlist?list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH)
-   - Only watch the most relevant parts for:
-     - train/test split
-     - evaluation metrics
-     - overfitting/underfitting
-     - basic text preprocessing
+### To watch
+1. [NLP intro](https://youtu.be/fLvJ8VdHLA0?si=QgK5-wWPDIvVBS9o)
+2. [Tokenization](https://youtu.be/YdreZtH8oWk?si=XnwgJUBV9BCRomva)
+3. [Vector Embedding short](https://youtube.com/shorts/FJtFZwbvkI4?si=_9O9ZUEK5bF_9eHE)
+4. [Vector Embedding explained](https://youtu.be/dN0lsF2cvm4?si=f9oNtbwSHmsMJLSN)
 
-2. NLP basics from the existing resource list:
-   - [NLP intro](https://youtu.be/fLvJ8VdHLA0?si=QgK5-wWPDIvVBS9o)
-   - [Tokenization](https://youtu.be/YdreZtH8oWk?si=XnwgJUBV9BCRomva)
-   - [Vector embedding short](https://youtube.com/shorts/FJtFZwbvkI4?si=_9O9ZUEK5bF_9eHE)
-   - [Vector embedding explained](https://youtu.be/dN0lsF2cvm4?si=f9oNtbwSHmsMJLSN)
-
-### To Do
-1. Read the sarcasm paper fully once.
-2. Create a note file with these headings:
+### To do
+1. Make two project folders:
+   - `sarcasm_thesis/`
+   - `bangla_cyberbullying/`
+2. Create note files for both papers with these headings:
    - problem
    - dataset
    - model
-   - cue learning idea
-   - training setup
-   - evaluation metrics
+   - baselines
+   - evaluation
    - limitations
-3. Write one short paragraph each on:
-   - what sarcasm detection is
-   - what cyberbullying detection is
-   - why Bangla cyberbullying is more feasible this week
-4. Decide the exact working direction:
-   - **Main paper:** Bangla cyberbullying detection
-   - **Secondary thesis track:** multimodal sarcasm detection reproduction / understanding
+   - possible contributions
+3. Decide the exact target of each paper.
+4. Set up Python environment and install core libraries.
 
-### Code to Implement
-Create the project structure:
-
-```text
-project/
-├── data/
-├── notebooks/
-├── src/
-├── results/
-├── models/
-└── paper_draft/
-```
-
-Create a starter notebook:
-- `01_data_loading_and_baselines.ipynb`
-
-Implement:
-- dataset loading
-- train/validation/test split
-- basic text cleaning pipeline
-- label distribution summary
-- metric functions for:
+### Code to implement
+- Create starter notebooks/scripts for both projects.
+- Implement a common evaluation function for:
   - accuracy
   - precision
   - recall
-  - F1-score
+  - macro F1
+  - weighted F1
+  - confusion matrix
 
-### Expected Outcomes
-By the end of Day 1, I should have:
-- a clear understanding of the main idea of the sarcasm paper
-- a final decision to focus on Bangla cyberbullying as the main fast paper
-- project folders ready
-- a notebook that loads data and evaluates models
+### Expected outcomes
+- clear problem statements for both papers
+- environment ready
+- starter codebase for both
+- solid understanding of the main concepts
 
 ---
 
-## Day 02 — Understand Datasets and Lock the Exact Paper Problem
+## Day 02 — Data pipeline and baseline setup
 
-### To Read
-1. **Bangla cyberbullying dataset / related work**
-   - [Bengali cyberbullying detection: A comprehensive dataset for advanced text analysis](https://www.sciencedirect.com/science/article/pii/S2352340925009266)
+### To read
 
-2. **Additional dataset options**
-   - [Mendeley — Bangla Multilabel Cyberbully, Sexual Harassment, Threat and Spam Dataset](https://data.mendeley.com/datasets/sz5558wrd4/2)
-   - [Kaggle — Bengali Cyber Bullying Dataset](https://www.kaggle.com/datasets/moshiurrahmanfaisal/bangla-cyber-bullying-dataset)
+#### Thesis sarcasm paper
+1. Read the experiment section of the cue-learning paper carefully.
+2. Read CLIP usage examples:
+   - [OpenAI CLIP repository](https://github.com/openai/CLIP)
+3. Read prompt tuning basics:
+   - [Hugging Face PEFT Prompt Tuning](https://huggingface.co/docs/peft/main/en/package_reference/prompt_tuning)
+   - [Prompting / soft prompt concepts](https://huggingface.co/docs/peft/main/en/conceptual_guides/prompting)
 
-3. **For multimodal sarcasm benchmark awareness**
-   - [MMSD2.0 paper](https://aclanthology.org/2023.findings-acl.689/)
-   - [MMSD2.0 dataset repository](https://github.com/joeying1019/mmsd2.0)
+#### Cyberbullying paper
+1. Inspect the chosen Bangla dataset paper and label structure.
 
-### To Watch
-1. [FreeCodeCamp — Data Science full course](https://www.youtube.com/watch?v=r-uOLxNrNk8)
-   - Watch only the parts needed for:
-     - problem framing
-     - data preprocessing
-     - evaluation pipeline
+### To watch
+1. [CampusX 100 Days ML playlist](https://www.youtube.com/playlist?list=PLKnIA16_Rmvbr7zKYQuBfsVkjoLcJgxHH)
+   - watch only relevant videos for:
+     - train/test split
+     - text preprocessing
+     - metrics
+     - model evaluation
+2. [FreeCodeCamp Data Science video](https://www.youtube.com/watch?v=r-uOLxNrNk8)
+   - only the practical parts relevant to preprocessing / workflow
 
-2. Optional overview:
-   - [Google Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course)
+### To do
 
-### To Do
-1. Compare 2–3 Bangla cyberbullying datasets.
-2. Select one dataset as the **main dataset**.
-3. Decide the task setup:
-   - **Binary classification first**: bullying vs non-bullying
-   - multiclass only if time remains
-4. Draft a working title, for example:
-   - **Bangla Cyberbullying Detection using Transformer Baselines and Error Analysis**
-5. Write 2–3 research questions, such as:
-   - Which model works best for Bangla cyberbullying detection?
-   - How much better are transformer models than classical ML baselines?
-   - Which error categories remain difficult?
+#### Thesis sarcasm paper
+1. Download and inspect the sarcasm dataset you will use first.
+   - Prefer a benchmark like MMSD2.0 or a reliable multimodal sarcasm dataset.
+2. Understand the format:
+   - text field
+   - image path / image id
+   - label
+3. Decide your first baselines:
+   - text-only baseline
+   - image-only baseline
+   - simple multimodal baseline
 
-### Code to Implement
-In `01_data_loading_and_baselines.ipynb`:
-- load the chosen dataset
-- inspect class distribution
-- remove duplicates
-- handle missing rows
-- split into train/validation/test
+#### Cyberbullying paper
+1. Choose the Bangla cyberbullying dataset.
+2. Clean the dataset:
+   - remove duplicates
+   - remove missing rows
+   - inspect label balance
+3. Decide binary vs multiclass setup.
+   - Recommended: start with **binary**, then extend if time remains.
+
+### Code to implement
+
+#### Thesis sarcasm paper
+- dataset loader for text + image
+- sample visualization / inspection script
+- train/validation/test split
+
+#### Cyberbullying paper
+- dataset loader
+- preprocessing pipeline
+- train/validation/test split
 - save processed CSV files
 
-Implement the first serious baseline:
-- **TF-IDF + Logistic Regression**
-
-### Expected Outcomes
-By the end of Day 2, I should have:
-- one final dataset selected
-- a specific paper title
-- a cleaned and processed dataset
-- a working TF-IDF + Logistic Regression baseline
+### Expected outcomes
+- usable datasets ready for both projects
+- clear baseline plan for both
+- no ambiguity about data format
 
 ---
 
-## Day 03 — Build the Main Classical Baseline Models
+## Day 03 — Strong classical baselines + simple multimodal baseline
 
-### To Read
-1. Revisit metrics:
-   - [Google ML Crash Course — Accuracy, Precision, Recall](https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall)
+### To read
+1. Revisit metrics and error analysis notes:
+   - [Google Classification module](https://developers.google.com/machine-learning/crash-course/classification)
 
-2. Revisit transformer intuition:
-   - [Hugging Face — How do Transformers work?](https://huggingface.co/learn/llm-course/en/chapter1/4)
+### To watch
+#### For cyberbullying paper
+1. [Naive Bayes](https://youtu.be/8vv9julkQEA?si=yE7_boraLqzaWoZH)
+2. [Decision Tree Implementation](https://youtu.be/PHxYNGo8NcI?si=lldNKJKZaZGZQx6D)
+3. [Random Forest Basics](https://youtu.be/gkXX4h3qYm4?si=bkULumqFr7zUQObx)
+4. [Random Forest Implementation](https://youtu.be/ok2s1vV9XW0?si=XjXDX7PjKUW_M_ex)
+5. [SVM Basics](https://youtu.be/NDqACjz5j8g?si=niJ3vNsVK_PaUnhL)
+6. [SVM Implementation](https://youtu.be/FB5EdxAGxQg?si=Tye3KLmUG99Em5tF)
 
-### To Watch
-From the existing list, only use what is directly needed for implementation:
+### To do
 
-- [Naive Bayes](https://youtu.be/8vv9julkQEA?si=yE7_boraLqzaWoZH)
-- [Decision Tree Implementation](https://youtu.be/PHxYNGo8NcI?si=lldNKJKZaZGZQx6D)
-- [Random Forest Basics](https://youtu.be/gkXX4h3qYm4?si=bkULumqFr7zUQObx)
-- [Random Forest Implementation](https://youtu.be/ok2s1vV9XW0?si=XjXDX7PjKUW_M_ex)
-- [SVM Basics](https://youtu.be/NDqACjz5j8g?si=niJ3vNsVK_PaUnhL)
-- [SVM Implementation](https://youtu.be/FB5EdxAGxQg?si=Tye3KLmUG99Em5tF)
-
-### To Do
-Implement and compare these classical models:
+#### Cyberbullying paper
+Train and compare:
 - TF-IDF + Logistic Regression
 - TF-IDF + Naive Bayes
 - TF-IDF + SVM
 - TF-IDF + Random Forest
 
-For each model, record:
-- accuracy
-- macro F1
-- weighted F1
-- precision
-- recall
-- confusion matrix
+#### Thesis sarcasm paper
+Build the first simple multimodal baseline:
+- text embedding + image embedding
+- concatenate features
+- small classifier on top
 
-### Code to Implement
-Create a reusable training/evaluation pipeline:
-- TF-IDF vectorizer
-- training loop for multiple models
-- evaluation table
+Also create two weaker baselines:
+- text-only
+- image-only
+
+### Code to implement
+
+#### Cyberbullying paper
+- full classical baseline training loop
+- metric table export
 - confusion matrix plotting
 
-Save outputs to:
-- `results/classical_baselines.csv`
+#### Thesis sarcasm paper
+- CLIP embedding extraction for text and image
+- feature concatenation
+- MLP / logistic regression classifier on top
+- evaluation script
 
-### Expected Outcomes
-By the end of Day 3, I should have:
-- 3–4 working classical baseline models
-- a clean comparison table
-- one best classical baseline
-- enough material to write the classical experiments section
+### Expected outcomes
+- strong classical baseline for cyberbullying
+- first working multimodal sarcasm baseline
+- text-only / image-only comparison started
 
 ---
 
-## Day 04 — Build the Deep Learning / Transformer Model
+## Day 04 — Deep learning day for both papers
 
-### To Read
-1. Hugging Face fundamentals:
-   - [Hugging Face — Transformers, what can they do?](https://huggingface.co/learn/llm-course/chapter1/3)
-   - [Hugging Face — How do Transformers work?](https://huggingface.co/learn/llm-course/en/chapter1/4)
+### To read
+1. [Transformers - what can they do?](https://huggingface.co/learn/llm-course/chapter1/3)
+2. [How transformers work](https://huggingface.co/learn/llm-course/en/chapter1/4)
+3. For multimodal understanding:
+   - [A multimodal world](https://huggingface.co/learn/computer-vision-course/en/unit4/multimodal-models/a_multimodal_world)
 
-2. If needed, revisit NLP basics:
-   - [NLP intro](https://youtu.be/fLvJ8VdHLA0?si=QgK5-wWPDIvVBS9o)
+### To watch
+1. [RNN explained](https://youtu.be/AsNTP8Kwu80?si=HSkM9MOoSNQlpbNT)
+2. [RNN implementation](https://youtu.be/0_PgWWmauHk?si=xC67ecbKAze2FD13)
+3. [LSTM](https://youtu.be/b61DPVFX03I?si=2R83brFKALCbcBLZ)
 
-### To Watch
-Use RNN/LSTM videos only for background, not as the main work of the day:
-- [RNN explained](https://youtu.be/AsNTP8Kwu80?si=HSkM9MOoSNQlpbNT)
-- [RNN implementation](https://youtu.be/0_PgWWmauHk?si=xC67ecbKAze2FD13)
-- [LSTM](https://youtu.be/b61DPVFX03I?si=2R83brFKALCbcBLZ)
+Watch these lightly for background only. Do **not** spend the whole day here.
 
-### To Do
-Train at least one transformer-based classifier.
+### To do
 
-Recommended options:
-- multilingual BERT
-- XLM-RoBERTa
-- Bangla-specific BERT if easily available
+#### Cyberbullying paper
+Train at least one transformer model:
+- multilingual BERT, XLM-R, or Bangla-specific transformer if quickly available
 
-The goal is **not** to try too many models. The goal is to get:
-- one strong classical baseline
-- one strong transformer baseline
+#### Thesis sarcasm paper
+Train at least one better multimodal model:
+- CLIP-based classifier with trainable top layer
+- compare frozen CLIP features vs partially trainable classifier head
 
-### Code to Implement
-Create a new notebook:
-- `02_transformer_baseline.ipynb`
+Also document:
+- training settings
+- learning rate
+- batch size
+- epoch count
+- early stopping / validation strategy
 
-Implement:
+### Code to implement
+
+#### Cyberbullying paper
 - tokenizer
-- input encoding
-- transformer-based sequence classification
+- transformer fine-tuning pipeline
 - validation loop
-- early stopping
 - checkpoint saving
 
-Save outputs to:
-- `models/best_transformer_model/`
-- `results/transformer_results.csv`
+#### Thesis sarcasm paper
+- CLIP feature pipeline
+- training script for multimodal classifier head
+- evaluation across text-only, image-only, multimodal
 
-### Expected Outcomes
-By the end of Day 4, I should have:
-- one working transformer model
-- comparison against classical baselines
-- a strong modern baseline for the paper
+### Expected outcomes
+- transformer baseline for cyberbullying
+- stronger multimodal sarcasm model than Day 3 baseline
+- model comparison tables growing for both papers
 
 ---
 
-## Day 05 — Start the Paper Properly and Begin the Thesis Track
+## Day 05 — Cue learning / prompt-inspired improvement + paper drafting starts seriously
 
-### To Read
-1. Re-read the reference sarcasm paper:
-   - [A multi-modal sarcasm detection model based on cue learning](https://www.nature.com/articles/s41598-025-94266-w.pdf)
+### To read
+1. Re-read the cue-learning paper carefully:
+   - [Cue learning paper PDF](https://www.nature.com/articles/s41598-025-94266-w.pdf)
+2. Prompt tuning docs:
+   - [Prompt tuning](https://huggingface.co/docs/peft/main/en/package_reference/prompt_tuning)
+   - [Soft prompting concepts](https://huggingface.co/docs/peft/main/en/conceptual_guides/prompting)
 
-2. CLIP:
-   - [OpenAI CLIP repository](https://github.com/openai/CLIP)
+### To watch
+1. [Interested in something like this](https://youtu.be/JgnbwKnHMZQ?si=VGkSGGG79Fq4R88F)
+2. [Video 1](https://youtu.be/5HQCNAsSO-s?si=pzWjxyfnoiplFPse)
+3. [Video 2](https://youtu.be/4YGkfAd2iXM?si=_RFMwVQvnLreFPbg)
 
-3. Prompt tuning / soft prompts:
-   - [Hugging Face PEFT — Prompt tuning](https://huggingface.co/docs/peft/main/en/package_reference/prompt_tuning)
-   - [Hugging Face PEFT — Soft prompts overview](https://huggingface.co/docs/peft/main/en/conceptual_guides/prompting)
+### To do
 
-### To Watch
-From the current resource list:
-- [Resource 1](https://youtu.be/5HQCNAsSO-s?si=pzWjxyfnoiplFPse)
-- [Resource 2](https://youtu.be/4YGkfAd2iXM?si=_RFMwVQvnLreFPbg)
-- [Resource 3](https://youtu.be/JgnbwKnHMZQ?si=VGkSGGG79Fq4R88F)
+#### Thesis sarcasm paper
+This is the key day.
 
-### To Do
-Split the day into two tracks.
+Implement an **improved model** inspired by the paper. It does not need to be a perfect replica, but it must be a real upgrade over the simple baseline.
 
-#### Main Paper Track
-Start writing these sections:
+Possible realistic improvements:
+- prompt-like textual cues for sarcasm / non-sarcasm classes
+- handcrafted sarcasm cue templates
+- similarity-based selection of prompt candidates
+- multiple text prompts and ensemble scores
+- class-specific learned vectors on top of CLIP text embeddings
+
+Minimum target:
+- simple baseline
+- improved cue/prompt-inspired version
+- comparison table
+
+#### Cyberbullying paper
+Start writing the paper seriously:
 - Abstract
 - Introduction
 - Related Work
 - Dataset
-- Methodology
+- Methods
 
-#### Thesis / Sarcasm Track
-Only do the realistic minimum today:
-- understand CLIP
-- understand prompt / cue learning
-- inspect MMSD2.0 structure
-- prepare a starter notebook for sarcasm work
+Also finalize the best model shortlist:
+- best classical
+- best transformer
 
-### Code to Implement
-#### Main Paper
-- save final predictions from the best text models
-- generate confusion matrix and class-wise metrics
+### Code to implement
 
-#### Sarcasm Track
-Create:
-- `03_mmsd2_clip_baseline.ipynb`
+#### Thesis sarcasm paper
+- prompt / cue template code
+- class prompt generation
+- cosine similarity-based scoring or selection
+- comparison with the previous baseline
 
-Implement:
-- dataset loading
-- sample inspection of text-image pairs
-- note modality-related fields
-- CLIP embedding extraction starter code
+#### Cyberbullying paper
+- final training rerun for best models if needed
+- export predictions
+- save result tables
 
-### Expected Outcomes
-By the end of Day 5, I should have:
-- the first half of the cyberbullying paper drafted
-- a real conceptual understanding of CLIP and prompt tuning
-- a starter notebook for multimodal sarcasm work
+### Expected outcomes
+- thesis work now has a **proper improved model direction**
+- cyberbullying paper draft is half written
+- both projects now have real experiments, not just ideas
 
 ---
 
-## Day 06 — Improve Experiments, Run Ablations, and Do Error Analysis
+## Day 06 — Ablations, error analysis, and full drafts
 
-### To Read
-1. Reproducibility / reporting checklist:
-   - [ACL checklist PDF](https://aclanthology.org/attachments/2025.findings-emnlp.1404.checklist.pdf)
+### To read
+1. [ACL reproducibility / reporting checklist](https://aclanthology.org/attachments/2025.findings-emnlp.1404.checklist.pdf)
+2. [Weights & Biases quickstart](https://docs.wandb.ai/get-started)
 
-2. Experiment tracking:
-   - [Weights & Biases quickstart](https://docs.wandb.ai/get-started)
+### To do
 
-### To Watch
-No heavy new videos today.
-Only use short targeted videos if I get blocked in implementation.
+#### Thesis sarcasm paper
+Run ablations such as:
+- text-only vs image-only vs multimodal
+- simple CLIP fusion vs cue/prompt-enhanced version
+- different numbers of prompt templates if possible
+- frozen features vs trainable classifier head
 
-### To Do
-For the **cyberbullying paper**, do the following:
+Perform error analysis:
+- where image helps
+- where text alone is enough
+- where sarcasm is culturally dependent
+- label ambiguity cases
 
-1. Compare:
-- best classical baseline
-- best transformer baseline
+Start writing full draft:
+- Abstract
+- Introduction
+- Related Work
+- Method
+- Dataset
+- Experiments
+- Initial Results
 
-2. Run at least 2 additional checks, such as:
-- with preprocessing vs without preprocessing
-- class weighting vs no class weighting
-- smaller vs larger max sequence length
-- binary vs multiclass if possible
+#### Cyberbullying paper
+Run final analysis:
+- best classical vs best transformer
+- preprocessing vs no preprocessing
+- class weighting if relevant
+- binary vs multiclass if feasible
 
-3. Perform error analysis:
-- examples the model gets right
-- examples it gets wrong
-- slang / abusive words / spelling variation issues
-- ambiguous or borderline cases
-
-4. Write these sections:
+Write remaining sections:
 - Results
 - Error Analysis
 - Limitations
+- Conclusion
 
-For the **sarcasm thesis track**:
-- write a summary of the cue-learning paper in my own words
-- list 3 possible extension directions
+### Code to implement
 
-### Code to Implement
-For cyberbullying:
-- ablation result table
+#### Thesis sarcasm paper
+- ablation experiment loop
 - error analysis export
-- sample misclassification analysis cells
+- result table generation
 
-For sarcasm:
-- simple CLIP embedding extraction test on a few examples if feasible
+#### Cyberbullying paper
+- final comparison table
+- confusion matrix figure
+- misclassification export
 
-### Expected Outcomes
-By the end of Day 6, I should have:
-- final model comparison results
-- a solid error analysis section
-- an almost complete cyberbullying paper draft
-- a much stronger understanding of how to extend the sarcasm thesis work
+### Expected outcomes
+- thesis paper has real ablation results
+- cyberbullying paper has a nearly complete draft
+- both have serious result sections
 
 ---
 
-## Day 07 — Finalize the Paper and Package Everything Cleanly
+## Day 07 — Finalize both first-submission drafts and package deliverables
 
-### To Read
-1. Re-read the checklist:
-   - [ACL checklist PDF](https://aclanthology.org/attachments/2025.findings-emnlp.1404.checklist.pdf)
+### To read
+1. Re-read your own drafts.
+2. Re-check the reproducibility checklist:
+   - [ACL checklist](https://aclanthology.org/attachments/2025.findings-emnlp.1404.checklist.pdf)
 
-2. Revisit the cyberbullying dataset paper for framing if needed:
-   - [Bengali cyberbullying detection: A comprehensive dataset for advanced text analysis](https://www.sciencedirect.com/science/article/pii/S2352340925009266)
+### To do
 
-### To Watch
-No major new video today.
-Today is for writing, polishing, and packaging.
+#### Thesis sarcasm paper
+Finalize the first submissionable draft in this order:
+1. Title
+2. Abstract
+3. Introduction
+4. Related Work
+5. Methodology
+6. Experimental Setup
+7. Results
+8. Ablation Study
+9. Error Analysis
+10. Limitations
+11. Conclusion
 
-### To Do
-Finalize the cyberbullying paper in this order:
+Also prepare:
+- final result tables
+- model comparison chart
+- architecture diagram if possible
+- future work note for Bangla/Banglish extension
+
+#### Cyberbullying paper
+Finalize the first submissionable draft:
 1. Title
 2. Abstract
 3. Introduction
 4. Related Work
 5. Dataset
-6. Methodology
-7. Experimental Setup
+6. Methods
+7. Experiments
 8. Results
 9. Error Analysis
 10. Limitations
 11. Conclusion
 
-Prepare:
-- result tables
-- confusion matrix figure
-- model comparison figure
-- appendix / supplementary notes if needed
-
-Package the project for reproducibility:
+Also package the repo / folder:
 - `README.md`
 - `requirements.txt`
-- clean notebook names
-- saved result files
-- saved best model
+- cleaned notebooks
+- trained model checkpoints
+- figures
+- results CSV files
 
-For the sarcasm track, prepare a mini deliverable:
-- 2–3 page summary of the cue-learning paper
-- proposed thesis extension idea
-- dataset options and risks
-- starter notebook / pseudocode pipeline
+### Code to implement
+- final rerun if any key result is missing
+- save best models
+- save plots
+- save prediction files
+- clean training scripts
 
-### Code to Implement
-Final cleanup:
-- export best results to CSV
-- save figures as PNG
-- save model checkpoint
-- save test predictions
+### Expected outcomes
+By the end of Day 7, you should have:
 
-### Expected Outcomes
-By the end of Day 7, I should have:
-- a complete cyberbullying paper draft
-- working classical ML and transformer models
-- tables and figures ready
-- a clean and reproducible folder / repo structure
-- a thesis-ready understanding of multimodal sarcasm detection
-- a small starter pipeline for the sarcasm thesis work
+#### Thesis sarcasm paper
+- working multimodal model
+- improved cue/prompt-inspired version
+- multiple baseline comparisons
+- ablation and error analysis
+- first submissionable draft
+- strong conceptual understanding of the paper and related topics
 
----
-
-## What Exactly to Code During the Week
-
-### For the Main Cyberbullying Paper
-Implement these in order:
-1. Data loading and cleaning
-2. Train/validation/test split
-3. TF-IDF + Logistic Regression
-4. TF-IDF + Naive Bayes
-5. TF-IDF + SVM
-6. One transformer fine-tuning pipeline
-7. Evaluation metrics:
-   - accuracy
-   - precision
-   - recall
-   - macro F1
-   - weighted F1
-   - confusion matrix
-8. Error analysis export
-9. Final figures and result tables
-
-### For the Sarcasm Thesis Track
-Implement only the realistic minimum this week:
-1. Read and summarize the cue-learning paper
-2. Load a reliable dataset like MMSD2.0
-3. Inspect text-image pairs
-4. Build a simple CLIP embedding extraction notebook
-5. Write down how cue learning / prompt tuning would be added next
-
----
-
-## What Not to Waste Time On This Week
-
-Do **not** spend the week trying to:
-- complete all of 100 Days of ML
-- deeply study every classical ML algorithm mathematically
-- build a transformer from scratch
-- build a large Bangla sarcasm dataset manually
-- scrape many random websites without a proper labeling plan
-- fully master RNN/LSTM theory
-
-The real priority is:
-- one good dataset
-- one clean baseline suite
-- one solid transformer model
-- one complete paper draft
-- one strong thesis-aligned starter track
-
----
-
-## Suggested Final Output After 7 Days
-
-### Paper 01 (Main)
-**Bangla Cyberbullying Detection using Classical ML and Transformer Baselines**
-
-Should include:
-- dataset description
-- preprocessing
+#### Cyberbullying paper
+- cleaned dataset and full pipeline
 - classical ML baselines
 - transformer baseline
-- evaluation table
+- comparison tables
+- error analysis
+- first submissionable draft
+- strong conceptual understanding of Bangla text classification workflow
+
+---
+
+# Topic checklist — what you must understand this week
+
+## For sarcasm thesis paper
+- sarcasm as incongruity
+- multimodal learning basics
+- CLIP
+- text/image shared embedding space
+- feature fusion
+- prompt tuning / cue learning intuition
+- cosine similarity
+- few-shot / low-resource thinking
+- ablations and error analysis
+
+## For cyberbullying paper
+- text classification pipeline
+- Bangla text preprocessing
+- TF-IDF
+- logistic regression / SVM / Naive Bayes / Random Forest
+- transformer fine-tuning
+- class imbalance
+- precision / recall / F1
 - confusion matrix
+- error analysis
+
+---
+
+# Minimum model targets by the end of the week
+
+## Thesis sarcasm paper
+You should aim to have at least:
+1. text-only baseline
+2. image-only baseline
+3. simple multimodal baseline
+4. improved cue/prompt-inspired multimodal model
+
+## Cyberbullying paper
+You should aim to have at least:
+1. TF-IDF + Logistic Regression
+2. TF-IDF + SVM
+3. TF-IDF + Naive Bayes
+4. one transformer model
+
+---
+
+# Writing targets by the end of the week
+
+## Thesis sarcasm paper
+Draft must include:
+- motivation
+- paper summary vs your extension
+- method details
+- dataset description
+- experiment settings
+- results and ablations
+- error analysis
+- limitations and future work
+
+## Cyberbullying paper
+Draft must include:
+- motivation for Bangla cyberbullying detection
+- dataset description
+- baseline comparison
+- transformer model results
 - error analysis
 - limitations
 
-### Paper / Thesis Track 02 (Starter)
-**Multimodal Sarcasm Detection with CLIP-based Cue Learning**
+---
 
-Should include:
-- paper summary
-- understanding of CLIP and cue learning
-- dataset shortlist
-- starter notebook
-- next-step implementation plan
+# What not to do this week
+
+Do **not** waste time on:
+- completing all ML playlists end-to-end
+- advanced theory not needed for implementation
+- building a huge new Bangla sarcasm dataset from scratch
+- trying too many models without documenting results
+- rewriting code repeatedly without saving experiments
 
 ---
 
-## Notes
+# Final note
 
-- Bangla multimodal sarcasm detection is still a strong thesis idea, but it is riskier for a 7-day deadline because data collection and annotation are much harder.
-- Bangla cyberbullying detection is the best short-term publication path.
-- If extra time remains after Day 7, the next best step is to strengthen the sarcasm thesis track using an English benchmark first, then attempt a Bangla/Banglish pilot extension.
+This revised plan is intentionally aggressive because you said you can fully use the week. The best use of that time is:
+
+- **morning / first half:** thesis sarcasm model and reading
+- **second half:** cyberbullying model and writing
+- **night / final block:** documentation, tables, figures, and paper drafting
+
+The thesis paper now gets **full implementation priority**, not just background reading.
+
